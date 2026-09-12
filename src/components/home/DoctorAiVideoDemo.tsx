@@ -119,6 +119,7 @@ export default function DoctorAiVideoDemo() {
     const isAi = item.speaker === 'Receptionist';
     const formattedText = getFormattedText(item.text);
     const utterance = new SpeechSynthesisUtterance(formattedText);
+    utterance.lang = 'en-US';
 
     if (isAi) {
       const profile = voiceProfiles[selectedVoiceProfile];
@@ -127,37 +128,56 @@ export default function DoctorAiVideoDemo() {
 
       if (availableVoices.length > 0) {
         const found = availableVoices.find((v) =>
-          v.lang.includes('en') &&
+          v.lang.toLowerCase().includes('en') &&
           profile.keywords.some((kw) => v.name.toLowerCase().includes(kw.toLowerCase()))
-        ) || availableVoices.find((v) => v.lang.includes('en') && v.name.includes('Female'));
+        ) || availableVoices.find((v) => v.lang.toLowerCase().startsWith('en'));
 
         if (found) utterance.voice = found;
       }
     } else {
-      utterance.pitch = 1.0;
+      // Patient / Caller Voice Config (Mobile iOS & Android Optimized)
+      utterance.pitch = 0.92;
       utterance.rate = 1.0;
+
       if (availableVoices.length > 0) {
+        const callerKeywords = ['daniel', 'david', 'alex', 'fred', 'aaron', 'rishi', 'male', 'guy', 'george', 'google us english'];
         const maleVoice = availableVoices.find(
-          (v) => v.lang.includes('en') && (v.name.includes('David') || v.name.includes('Male') || v.name.includes('Guy') || v.name.includes('Alex'))
-        );
+          (v) => v.lang.toLowerCase().includes('en') && callerKeywords.some((kw) => v.name.toLowerCase().includes(kw))
+        ) || availableVoices.find(
+          (v) => v.lang.toLowerCase().includes('en') && !v.name.toLowerCase().includes('female') && !v.name.toLowerCase().includes('zira')
+        ) || availableVoices.find((v) => v.lang.toLowerCase().startsWith('en'));
+
         if (maleVoice) utterance.voice = maleVoice;
       }
     }
 
-    // Advance ONLY when speech naturally finishes speaking out loud
+    // Safety timer for mobile browsers (iOS Safari / Android) where TTS onend may stall
+    const estimatedDuration = Math.max(3200, formattedText.length * 85);
+    let stepAdvanced = false;
+
+    const safeAdvance = () => {
+      if (stepAdvanced) return;
+      stepAdvanced = true;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (isPlaying) {
+        timeoutRef.current = setTimeout(() => {
+          advanceNextStep(stepIndex);
+        }, 500);
+      }
+    };
+
     utterance.onend = () => {
-      if (!isPlaying) return;
-      timeoutRef.current = setTimeout(() => {
-        advanceNextStep(stepIndex);
-      }, 700);
+      safeAdvance();
     };
 
     utterance.onerror = () => {
-      if (!isPlaying) return;
-      timeoutRef.current = setTimeout(() => {
-        advanceNextStep(stepIndex);
-      }, 3500);
+      safeAdvance();
     };
+
+    // Backup trigger if browser onend fails
+    timeoutRef.current = setTimeout(() => {
+      safeAdvance();
+    }, estimatedDuration);
 
     window.speechSynthesis.speak(utterance);
   };
