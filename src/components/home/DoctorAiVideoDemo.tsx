@@ -12,13 +12,13 @@ export default function DoctorAiVideoDemo() {
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // AI Receptionist Voice Persona Configurations (Ordered: Ava 1st, Emma 2nd, Savannah 3rd)
+  // AI Receptionist Voice Persona Configurations with distinct pitch, rate, and voice offsets
   const voiceProfiles = {
-    ava: { name: 'Ava', label: 'Ava (Natural & Expressive)', pitch: 1.08, rate: 1.00, keywords: ['Karen', 'Fiona', 'Google', 'Female'] },
-    emma: { name: 'Emma', label: 'Emma (Warm & Energetic)', pitch: 1.15, rate: 1.00, keywords: ['Zira', 'Samantha', 'Google US English', 'Female', 'Natural'] },
-    savannah: { name: 'Savannah', label: 'Savannah (Bright & Adorable)', pitch: 1.20, rate: 1.02, keywords: ['Savannah', 'Samantha', 'Victoria', 'Zira', 'Google US English', 'Female', 'Natural'] },
-    sophia: { name: 'Sophia', label: 'Sophia (Upbeat & Neural)', pitch: 1.10, rate: 1.00, keywords: ['Jenny', 'Google UK English Female', 'Victoria', 'Female'] },
-    charlotte: { name: 'Charlotte', label: 'Charlotte (Polished & Elegant)', pitch: 1.08, rate: 1.00, keywords: ['Hazel', 'Susan', 'UK', 'Female'] },
+    ava: { name: 'Ava', label: 'Ava (Natural & Expressive)', pitch: 1.25, rate: 1.05, voiceOffset: 0, keywords: ['Karen', 'Samantha', 'Google US English', 'Female'] },
+    emma: { name: 'Emma', label: 'Emma (Warm & Energetic)', pitch: 0.92, rate: 0.98, voiceOffset: 1, keywords: ['Zira', 'Victoria', 'Fiona', 'Female'] },
+    savannah: { name: 'Savannah', label: 'Savannah (Bright & Youthful)', pitch: 1.45, rate: 1.12, voiceOffset: 2, keywords: ['Savannah', 'Jenny', 'Hazel', 'Female'] },
+    sophia: { name: 'Sophia', label: 'Sophia (Neural UK Accent)', pitch: 1.08, rate: 0.92, voiceOffset: 3, keywords: ['UK', 'Susan', 'Serena', 'Female'] },
+    charlotte: { name: 'Charlotte', label: 'Charlotte (Calm & Polished)', pitch: 0.82, rate: 0.90, voiceOffset: 4, keywords: ['Hazel', 'Veena', 'Moira', 'Female'] },
   };
 
   const activePersonaName = voiceProfiles[selectedVoiceProfile].name;
@@ -131,10 +131,15 @@ export default function DoctorAiVideoDemo() {
       utterance.rate = profile.rate;
 
       if (availableVoices.length > 0) {
-        const found = availableVoices.find((v) =>
-          v.lang.toLowerCase().includes('en') &&
+        const enVoices = availableVoices.filter((v) => v.lang.toLowerCase().includes('en'));
+
+        let found = enVoices.find((v) =>
           profile.keywords.some((kw) => v.name.toLowerCase().includes(kw.toLowerCase()))
-        ) || availableVoices.find((v) => v.lang.toLowerCase().startsWith('en'));
+        );
+
+        if (!found && enVoices.length > 0) {
+          found = enVoices[profile.voiceOffset % enVoices.length];
+        }
 
         if (found) utterance.voice = found;
       }
@@ -260,43 +265,45 @@ export default function DoctorAiVideoDemo() {
             Watch our 24/7 Virtual Receptionist handle patient inquiries, check live doctor availability, and book appointments directly into clinic calendars.
           </p>
 
-          {/* Preset Specialty Tabs */}
-          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 p-1.5 bg-[#080D1C] border border-white/10 rounded-2xl sm:rounded-full max-w-full font-['Outfit']">
-            <button
-              onClick={() => handleSelectSpecialty('general')}
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
-                selectedSpecialty === 'general'
-                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
-                  : 'text-[#8E9BB5] hover:text-white'
-              }`}
-            >
-              <Stethoscope className="w-3.5 h-3.5" />
-              <span>Primary Care</span>
-            </button>
+          {/* Preset Specialty Tabs - Single Responsive Row */}
+          <div className="mt-8 max-w-2xl mx-auto w-full px-1">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-3 p-1.5 bg-[#080D1C] border border-white/10 rounded-2xl sm:rounded-full font-['Outfit'] shadow-xl">
+              <button
+                onClick={() => handleSelectSpecialty('general')}
+                className={`py-2.5 px-1.5 sm:px-4 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1 sm:gap-2 text-center ${
+                  selectedSpecialty === 'general'
+                    ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-lg scale-[1.02]'
+                    : 'text-[#8E9BB5] hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <Stethoscope className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">Primary Care</span>
+              </button>
 
-            <button
-              onClick={() => handleSelectSpecialty('dental')}
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
-                selectedSpecialty === 'dental'
-                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
-                  : 'text-[#8E9BB5] hover:text-white'
-              }`}
-            >
-              <UserCheck className="w-3.5 h-3.5" />
-              <span>Dental Clinic</span>
-            </button>
+              <button
+                onClick={() => handleSelectSpecialty('dental')}
+                className={`py-2.5 px-1.5 sm:px-4 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1 sm:gap-2 text-center ${
+                  selectedSpecialty === 'dental'
+                    ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-lg scale-[1.02]'
+                    : 'text-[#8E9BB5] hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <UserCheck className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">Dental Clinic</span>
+              </button>
 
-            <button
-              onClick={() => handleSelectSpecialty('dermatology')}
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
-                selectedSpecialty === 'dermatology'
-                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
-                  : 'text-[#8E9BB5] hover:text-white'
-              }`}
-            >
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Dermatology</span>
-            </button>
+              <button
+                onClick={() => handleSelectSpecialty('dermatology')}
+                className={`py-2.5 px-1.5 sm:px-4 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1 sm:gap-2 text-center ${
+                  selectedSpecialty === 'dermatology'
+                    ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-lg scale-[1.02]'
+                    : 'text-[#8E9BB5] hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">Dermatology</span>
+              </button>
+            </div>
           </div>
         </div>
 
