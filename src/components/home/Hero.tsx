@@ -22,7 +22,7 @@ const wordVariants = {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#050A14] grain-overlay font-['DM_Sans']">
+    <section className="relative flex flex-col justify-center overflow-hidden bg-[#050A14] grain-overlay font-['DM_Sans'] pt-28 pb-12 sm:pt-36 sm:pb-16 min-h-[85vh] sm:min-h-screen">
 
       {/* Video background */}
       <VideoBackground
@@ -49,10 +49,10 @@ export default function Hero() {
       </div>
 
       {/* ── Main Content ── */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-16 pt-32 pb-20 max-w-4xl mx-auto w-full text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-16 max-w-4xl mx-auto w-full text-center">
 
         {/* Text content */}
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center w-full">
 
           {/* Eyebrow */}
           <motion.div
@@ -143,16 +143,44 @@ export default function Hero() {
               </span>
             ))}
           </motion.div>
+
+          {/* Sleek Live Metrics Bridge */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.92 }}
+            className="mt-8 pt-6 border-t border-white/10 w-full max-w-xl flex flex-wrap items-center justify-center gap-2.5 text-[11px] font-mono"
+          >
+            <div className="flex items-center gap-2 text-white/90 bg-[#080D1C]/80 px-3.5 py-1.5 rounded-full border border-white/10">
+              <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse" />
+              <span className="font-bold text-[#14B8A6]">24/7</span>
+              <span className="text-[#8E9BB5]">Online</span>
+            </div>
+
+            <div className="flex items-center gap-2 text-white/90 bg-[#080D1C]/80 px-3.5 py-1.5 rounded-full border border-white/10">
+              <span className="font-bold text-[#D4AF37]">210ms</span>
+              <span className="text-[#8E9BB5]">Latency</span>
+            </div>
+
+            <div className="flex items-center gap-2 text-white/90 bg-[#080D1C]/80 px-3.5 py-1.5 rounded-full border border-white/10">
+              <span className="font-bold text-[#7C5CFC]">100%</span>
+              <span className="text-[#8E9BB5]">Capture</span>
+            </div>
+
+            <div className="flex items-center gap-2 text-white/90 bg-[#080D1C]/80 px-3.5 py-1.5 rounded-full border border-white/10">
+              <span className="font-bold text-[#F43F5E]">15x</span>
+              <span className="text-[#8E9BB5]">Avg ROI</span>
+            </div>
+          </motion.div>
+
         </div>
 
       </div>
 
-
-
       {/* Scroll indicator */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-1.5 text-[#8E9BB5] animate-bounce-y">
-        <span className="text-[9px] tracking-[0.2em] uppercase font-mono font-bold">Scroll</span>
-        <ChevronDown className="w-4 h-4 text-[#D4AF37]" />
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-1 text-[#8E9BB5] opacity-60">
+        <span className="text-[8px] tracking-[0.2em] uppercase font-mono font-bold">Scroll</span>
+        <ChevronDown className="w-3.5 h-3.5 text-[#D4AF37]" />
       </div>
     </section>
   );
