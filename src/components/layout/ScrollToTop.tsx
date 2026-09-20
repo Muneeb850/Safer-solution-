@@ -19,14 +19,30 @@ export default function ScrollToTop() {
 
       return () => clearTimeout(timer);
     } else {
-      const timer = setTimeout(() => {
-        const element = document.querySelector(hash);
+      const performScroll = () => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+          const navHeight = window.innerWidth < 768 ? 80 : 100;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = Math.max(0, elementPosition - navHeight);
 
-      return () => clearTimeout(timer);
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        }
+      };
+
+      const t1 = setTimeout(performScroll, 50);
+      const t2 = setTimeout(performScroll, 300);
+      const t3 = setTimeout(performScroll, 650);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      };
     }
   }, [pathname, hash]);
 

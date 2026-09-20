@@ -5,22 +5,6 @@ import { motion } from 'framer-motion';
 import GoBackButton from '../components/ui/GoBackButton';
 
 export default function Services() {
-  const { hash } = useLocation();
-
-  useEffect(() => {
-    if (hash) {
-      const id = hash.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        const timer = setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 120);
-        return () => clearTimeout(timer);
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [hash]);
 
   const serviceSections = [
     {
