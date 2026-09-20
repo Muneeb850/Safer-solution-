@@ -97,7 +97,10 @@ export default function DoctorAiVideoDemo() {
   }, []);
 
   const stopSpeech = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
     }
@@ -157,7 +160,10 @@ export default function DoctorAiVideoDemo() {
     const safeAdvance = () => {
       if (stepAdvanced) return;
       stepAdvanced = true;
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
       if (isPlaying) {
         timeoutRef.current = setTimeout(() => {
           advanceNextStep(stepIndex);
@@ -177,6 +183,7 @@ export default function DoctorAiVideoDemo() {
       safeAdvance();
     }, estimatedDuration);
 
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
   };
 
@@ -216,9 +223,6 @@ export default function DoctorAiVideoDemo() {
   const handleSelectVoice = (vKey: 'savannah' | 'emma' | 'sophia' | 'charlotte' | 'ava') => {
     stopSpeech();
     setSelectedVoiceProfile(vKey);
-    if (isPlaying) {
-      setTimeout(() => playStepSpeech(currentStep), 100);
-    }
   };
 
   return (
@@ -257,10 +261,10 @@ export default function DoctorAiVideoDemo() {
           </p>
 
           {/* Preset Specialty Tabs */}
-          <div className="mt-8 flex items-center gap-2 p-1.5 bg-[#080D1C] border border-white/10 rounded-full overflow-x-auto no-scrollbar max-w-full justify-start sm:justify-center font-['Outfit']">
+          <div className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 p-1.5 bg-[#080D1C] border border-white/10 rounded-2xl sm:rounded-full max-w-full font-['Outfit']">
             <button
               onClick={() => handleSelectSpecialty('general')}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
                 selectedSpecialty === 'general'
                   ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
                   : 'text-[#8E9BB5] hover:text-white'
@@ -272,7 +276,7 @@ export default function DoctorAiVideoDemo() {
 
             <button
               onClick={() => handleSelectSpecialty('dental')}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
                 selectedSpecialty === 'dental'
                   ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
                   : 'text-[#8E9BB5] hover:text-white'
@@ -284,7 +288,7 @@ export default function DoctorAiVideoDemo() {
 
             <button
               onClick={() => handleSelectSpecialty('dermatology')}
-              className={`px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
                 selectedSpecialty === 'dermatology'
                   ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
                   : 'text-[#8E9BB5] hover:text-white'
