@@ -4,13 +4,7 @@ import { ArrowRight, PhoneCall, ChevronDown, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import VideoBackground from '../ui/VideoBackground';
 
-const stats = [
-  { value: '100%', label: 'Call Capture', color: '#7C5CFC' },
-  { value: '210ms', label: 'Voice Latency', color: '#D4AF37' },
-  { value: '15×', label: 'Avg ROI', color: '#14B8A6' },
-  { value: '24/7', label: 'Always Online', color: '#F43F5E' },
-  { value: '7 Days', label: 'Deploy Time', color: '#9D7DFF' },
-];
+
 
 const wordVariants = {
   hidden: { opacity: 0, y: 40, skewY: 3 },
@@ -153,26 +147,7 @@ export default function Hero() {
 
       </div>
 
-      {/* ── Bottom stat bar ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.9 }}
-        className="relative z-10 w-full border-t border-white/10 backdrop-blur-md bg-[#050A14]/80"
-      >
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-4 flex flex-wrap justify-center sm:justify-between gap-y-2 gap-x-6">
-          {stats.map((s) => (
-            <div key={s.label} className="flex items-center gap-2.5">
-              <span className="text-xl font-black font-['Syne']" style={{ color: s.color }}>
-                {s.value}
-              </span>
-              <span className="text-[10px] text-[#8E9BB5] uppercase tracking-[0.14em] font-mono font-bold">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+
 
       {/* Scroll indicator */}
       <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-1.5 text-[#8E9BB5] animate-bounce-y">
