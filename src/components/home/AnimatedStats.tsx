@@ -1,67 +1,112 @@
-import React from 'react';
-import Counter from '../ui/Counter';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
+import VideoBackground from '../ui/VideoBackground';
 
-export default function AnimatedStats() {
-  const stats = [
-    {
-      value: 500,
-      suffix: '+',
-      label: 'Projects & Systems Deployed',
-      description: 'Enterprise web, mobile, and AI deployments',
-    },
-    {
-      value: 99.8,
-      decimals: 1,
-      suffix: '%',
-      label: 'AI Call Resolution Rate',
-      description: 'Accurate intent capture and scheduling',
-    },
-    {
-      value: 0.2,
-      decimals: 1,
-      prefix: '< ',
-      suffix: 's',
-      label: 'Voice AI Latency',
-      description: 'Sub-second natural voice response time',
-    },
-    {
-      value: 4.8,
-      decimals: 1,
-      prefix: '$',
-      suffix: 'M+',
-      label: 'Recovered Client Revenue',
-      description: 'Captured from previously missed call leads',
-    },
-  ];
+const stats = [
+  { value: 4.8, prefix: '$', suffix: 'M+', label: 'Recovered Revenue', sub: 'Captured from missed-call leads', color: '#7C5CFC' },
+  { value: 500, suffix: '+', label: 'Projects Deployed', sub: 'Web, mobile & AI systems', color: '#D4AF37' },
+  { value: 99.8, suffix: '%', decimals: 1, label: 'AI Call Resolution', sub: 'Accurate intent & scheduling', color: '#14B8A6' },
+  { value: 15, suffix: '×', label: 'Average Client ROI', sub: 'Revenue vs. monthly plan cost', color: '#F43F5E' },
+];
+
+function AnimatedNumber({ to, prefix = '', suffix = '', decimals = 0, color }: {
+  to: number; prefix?: string; suffix?: string; decimals?: number; color: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const raw = useMotionValue(0);
+  const spring = useSpring(raw, { stiffness: 55, damping: 18 });
+
+  useEffect(() => {
+    if (inView) raw.set(to);
+  }, [inView, to, raw]);
+
+  useEffect(() => {
+    return spring.on('change', (v) => {
+      if (ref.current) {
+        ref.current.textContent = `${prefix}${v.toFixed(decimals)}${suffix}`;
+      }
+    });
+  }, [spring, prefix, suffix, decimals]);
 
   return (
-    <section className="py-16 bg-[#12161F] border-y border-[#232838] relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, idx) => (
+    <span ref={ref} className="tabular-nums stat-number" style={{ color }}>
+      {prefix}0{suffix}
+    </span>
+  );
+}
+
+export default function AnimatedStats() {
+  return (
+    <section className="relative py-20 overflow-hidden bg-[#050A14]">
+      {/* Background video */}
+      <VideoBackground
+        src="https://videos.pexels.com/video-files/7988062/7988062-uhd_2560_1440_25fps.mp4"
+        overlayOpacity="opacity-92"
+        overlayClassName="bg-gradient-to-r from-[#050A14]/98 via-[#050A14]/88 to-[#050A14]/98"
+      />
+
+      {/* Background image layer */}
+      <div
+        className="absolute inset-0 bg-cover bg-center pointer-events-none"
+        style={{ backgroundImage: `url('/images/ai_voice_bg.png')`, opacity: 0.04, mixBlendMode: 'screen' }}
+      />
+
+      {/* Section divider top */}
+      <div className="absolute top-0 left-0 right-0 section-divider" />
+      {/* Section divider bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent" />
+
+      {/* Glow orbs */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[250px] bg-[#7C5CFC]/10 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[200px] bg-[#D4AF37]/8 blur-[130px] rounded-full pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* Section label */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <span className="eyebrow-gold">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
+            Proven Results
+          </span>
+        </motion.div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+          {stats.map((s, i) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="text-center sm:text-left p-6 rounded-xl bg-[#0A0E14]/60 border border-[#232838]"
+              transition={{ duration: 0.55, delay: i * 0.1 }}
+              className="text-center space-y-2 group"
             >
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#12B886]">
-                <Counter
-                  to={stat.value}
-                  decimals={stat.decimals || 0}
-                  prefix={stat.prefix}
-                  suffix={stat.suffix}
+              {/* Number */}
+              <div className="text-4xl sm:text-5xl lg:text-6xl" style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900 }}>
+                <AnimatedNumber
+                  to={s.value}
+                  prefix={s.prefix}
+                  suffix={s.suffix}
+                  decimals={s.decimals || 0}
+                  color={s.color}
                 />
               </div>
-              <h4 className="mt-2 text-base font-bold text-white">
-                {stat.label}
-              </h4>
-              <p className="mt-1 text-xs text-[#9CA3AF]">
-                {stat.description}
-              </p>
+
+              {/* Label */}
+              <div className="text-sm font-bold text-white font-['Outfit']">{s.label}</div>
+              <div className="text-[11px] text-[#8E9BB5] font-['DM_Sans']">{s.sub}</div>
+
+              {/* Accent bar */}
+              <div
+                className="h-0.5 w-10 mx-auto rounded-full mt-3 transition-all duration-500 group-hover:w-16"
+                style={{ background: `linear-gradient(90deg, transparent, ${s.color}, transparent)` }}
+              />
             </motion.div>
           ))}
         </div>

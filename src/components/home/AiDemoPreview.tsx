@@ -61,10 +61,10 @@ export default function AiDemoPreview() {
           </p>
 
           {/* Tab Switcher */}
-          <div className="mt-8 inline-flex items-center gap-2 p-1.5 bg-[#12161F] border border-[#232838] rounded-xl">
+          <div className="mt-8 flex sm:inline-flex flex-col sm:flex-row items-center gap-2 p-1.5 bg-[#12161F] border border-[#232838] rounded-xl max-w-full">
             <button
               onClick={() => setActiveTab('simulator')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
                 activeTab === 'simulator'
                   ? 'bg-[#12B886] text-white shadow-lg shadow-[#12B886]/20'
                   : 'text-[#9CA3AF] hover:text-white'
@@ -75,7 +75,7 @@ export default function AiDemoPreview() {
             </button>
             <button
               onClick={() => setActiveTab('roi')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+              className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
                 activeTab === 'roi'
                   ? 'bg-[#12B886] text-white shadow-lg shadow-[#12B886]/20'
                   : 'text-[#9CA3AF] hover:text-white'

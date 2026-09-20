@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause, Volume2, VolumeX, Calendar, Clock, CheckCircle2, UserCheck, Stethoscope, Sparkles, ShieldCheck, PhoneCall, RefreshCw, MessageSquare, Mic, Volume1, Radio } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import VideoBackground from '../ui/VideoBackground';
 
 export default function DoctorAiVideoDemo() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -124,7 +125,7 @@ export default function DoctorAiVideoDemo() {
     if (isAi) {
       const profile = voiceProfiles[selectedVoiceProfile];
       utterance.pitch = profile.pitch;
-      utterance.rate = profile.rate; // Comfortable human speech rate
+      utterance.rate = profile.rate;
 
       if (availableVoices.length > 0) {
         const found = availableVoices.find((v) =>
@@ -135,7 +136,6 @@ export default function DoctorAiVideoDemo() {
         if (found) utterance.voice = found;
       }
     } else {
-      // Patient / Caller Voice Config (Mobile iOS & Android Optimized)
       utterance.pitch = 0.92;
       utterance.rate = 1.0;
 
@@ -151,7 +151,6 @@ export default function DoctorAiVideoDemo() {
       }
     }
 
-    // Safety timer for mobile browsers (iOS Safari / Android) where TTS onend may stall
     const estimatedDuration = Math.max(3200, formattedText.length * 85);
     let stepAdvanced = false;
 
@@ -174,7 +173,6 @@ export default function DoctorAiVideoDemo() {
       safeAdvance();
     };
 
-    // Backup trigger if browser onend fails
     timeoutRef.current = setTimeout(() => {
       safeAdvance();
     }, estimatedDuration);
@@ -224,52 +222,60 @@ export default function DoctorAiVideoDemo() {
   };
 
   return (
-    <section className="py-24 bg-[#0A0E14] relative overflow-hidden border-y border-[#232838]">
-      {/* Background Tech Image Layer */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-screen pointer-events-none"
-        style={{ backgroundImage: `url('/images/ai_voice_bg.png')` }}
+    <section className="py-28 bg-[#050A14] relative overflow-hidden border-y border-white/10 bg-tech-grid font-['DM_Sans']">
+      {/* Cinematic Video Background */}
+      <VideoBackground
+        src="https://videos.pexels.com/video-files/2278095/2278095-uhd_2560_1440_30fps.mp4"
+        overlayOpacity="opacity-88"
+        overlayClassName="bg-gradient-to-b from-[#050A14] via-[#050A14]/90 to-[#050A14]"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0E14] via-[#0A0E14]/75 to-[#0A0E14] pointer-events-none" />
 
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-[#12B886]/15 blur-[160px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#7C5CFC]/12 blur-[200px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#12B886]/10 border border-[#12B886]/30 text-[#12B886] text-xs font-semibold uppercase tracking-wider mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive Video & Voice Demo</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            See How Our Voice Agent Books <span className="text-gradient-emerald">Doctor Appointments</span>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-4"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+              Interactive AI Voice Console
+            </span>
+          </motion.div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight font-['Syne'] uppercase leading-[0.95]">
+            See How Our Voice Agent Books <span className="text-gradient-gold">Doctor Appointments</span>
           </h2>
-          <p className="mt-4 text-[#9CA3AF] text-base leading-relaxed">
+          <p className="mt-4 text-[#8E9BB5] text-sm sm:text-base leading-relaxed font-['DM_Sans']">
             Watch our 24/7 Virtual Receptionist handle patient inquiries, check live doctor availability, and book appointments directly into clinic calendars.
           </p>
 
-          {/* Preset Specialty Tabs (Mobile Optimized Scroll/Wrap) */}
-          <div className="mt-8 flex items-center gap-2 p-1.5 bg-[#12161F] border border-[#232838] rounded-xl overflow-x-auto max-w-full justify-start sm:justify-center">
+          {/* Preset Specialty Tabs */}
+          <div className="mt-8 flex items-center gap-2 p-1.5 bg-[#080D1C] border border-white/10 rounded-full overflow-x-auto no-scrollbar max-w-full justify-start sm:justify-center font-['Outfit']">
             <button
               onClick={() => handleSelectSpecialty('general')}
-              className={`px-4 py-2.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
                 selectedSpecialty === 'general'
-                  ? 'bg-[#12B886] text-white shadow-md shadow-[#12B886]/20'
-                  : 'text-[#9CA3AF] hover:text-white'
+                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
+                  : 'text-[#8E9BB5] hover:text-white'
               }`}
             >
               <Stethoscope className="w-3.5 h-3.5" />
-              <span>Primary Care Practice</span>
+              <span>Primary Care</span>
             </button>
 
             <button
               onClick={() => handleSelectSpecialty('dental')}
-              className={`px-4 py-2.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
                 selectedSpecialty === 'dental'
-                  ? 'bg-[#12B886] text-white shadow-md shadow-[#12B886]/20'
-                  : 'text-[#9CA3AF] hover:text-white'
+                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
+                  : 'text-[#8E9BB5] hover:text-white'
               }`}
             >
               <UserCheck className="w-3.5 h-3.5" />
@@ -278,52 +284,52 @@ export default function DoctorAiVideoDemo() {
 
             <button
               onClick={() => handleSelectSpecialty('dermatology')}
-              className={`px-4 py-2.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
                 selectedSpecialty === 'dermatology'
-                  ? 'bg-[#12B886] text-white shadow-md shadow-[#12B886]/20'
-                  : 'text-[#9CA3AF] hover:text-white'
+                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-md'
+                  : 'text-[#8E9BB5] hover:text-white'
               }`}
             >
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Dermatology Center</span>
+              <span>Dermatology</span>
             </button>
           </div>
         </div>
 
         {/* Video & Demo Card Container */}
-        <div className="glass-card rounded-3xl p-4 sm:p-6 lg:p-10 border border-[#12B886]/40 shadow-2xl relative overflow-hidden">
+        <div className="bento-card rounded-3xl p-4 sm:p-6 lg:p-10 bg-[#080D1C]/90 border border-white/10 shadow-2xl backdrop-blur-md relative overflow-hidden">
           
           {/* Top Bar */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-[#232838]">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/10">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#12B886]/15 border border-[#12B886]/30 flex items-center justify-center text-[#12B886] shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-[#7C5CFC]/20 border border-[#7C5CFC]/40 flex items-center justify-center text-[#7C5CFC] shrink-0">
                 <Stethoscope className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2 font-['Outfit']">
                   {activeScenario.clinicName}
-                  <span className="w-2 h-2 rounded-full bg-[#12B886] animate-pulse"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse"></span>
                 </h3>
-                <p className="text-[11px] sm:text-xs text-[#9CA3AF] font-mono">
+                <p className="text-[11px] sm:text-xs text-[#7C5CFC] font-mono">
                   {activeScenario.doctor} &bull; 24/7 Medical Receptionist
                 </p>
               </div>
             </div>
 
-            {/* Voice Persona Switcher (Mobile Scrollable) */}
-            <div className="flex items-center gap-2 bg-[#0A0E14] p-2 rounded-xl border border-[#232838] overflow-x-auto max-w-full">
-              <span className="text-[10px] font-mono font-bold text-[#D4AF6A] uppercase px-1.5 shrink-0 flex items-center gap-1">
-                <Mic className="w-3 h-3 text-[#12B886]" /> Receptionist:
+            {/* Voice Persona Switcher */}
+            <div className="flex items-center gap-2 bg-[#050A14] p-2 rounded-2xl border border-white/10 overflow-x-auto no-scrollbar max-w-full font-mono">
+              <span className="text-[10px] font-bold text-[#D4AF37] uppercase px-1.5 shrink-0 flex items-center gap-1">
+                <Mic className="w-3 h-3 text-[#7C5CFC]" /> Voice:
               </span>
 
               {(Object.keys(voiceProfiles) as Array<keyof typeof voiceProfiles>).map((vKey) => (
                 <button
                   key={vKey}
                   onClick={() => handleSelectVoice(vKey)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shrink-0 ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all shrink-0 ${
                     selectedVoiceProfile === vKey
-                      ? 'bg-[#12B886] text-white shadow-sm font-bold'
-                      : 'text-[#9CA3AF] hover:text-white hover:bg-[#12161F]'
+                      ? 'bg-[#7C5CFC] text-white shadow-sm font-bold'
+                      : 'text-[#8E9BB5] hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {voiceProfiles[vKey].name}
@@ -336,18 +342,18 @@ export default function DoctorAiVideoDemo() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8 items-center">
             
             {/* Left: Video Player Simulation (7 cols) */}
-            <div className="lg:col-span-7 bg-[#0A0E14] rounded-2xl p-6 border border-[#232838] relative overflow-hidden">
+            <div className="lg:col-span-7 bg-[#050A14] rounded-2xl p-4 sm:p-6 border border-white/10 relative overflow-hidden shadow-2xl">
               
               {/* Simulated Video Frame Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#232838]/60 mb-6">
-                <div className="flex items-center gap-2 text-xs font-mono text-[#9CA3AF]">
-                  <PhoneCall className="w-3.5 h-3.5 text-[#12B886] animate-pulse" />
-                  <span>LIVE CALL SIMULATION &bull; 00:24</span>
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-white/10 mb-6 font-mono">
+                <div className="flex items-center gap-2 text-xs text-[#7C5CFC]">
+                  <PhoneCall className="w-3.5 h-3.5 text-[#14B8A6] animate-pulse" />
+                  <span>LIVE VOICE AGENT SIMULATION &bull; 00:24</span>
                 </div>
 
                 {/* Active Persona Badge */}
-                <div className="text-[11px] font-mono text-[#D4AF6A] bg-[#D4AF6A]/10 px-2.5 py-0.5 rounded border border-[#D4AF6A]/30">
-                  Active Receptionist: {voiceProfiles[selectedVoiceProfile].name}
+                <div className="text-[11px] font-bold text-[#D4AF37] bg-[#D4AF37]/10 px-2.5 py-0.5 rounded border border-[#D4AF37]/30">
+                  Receptionist: {voiceProfiles[selectedVoiceProfile].name}
                 </div>
               </div>
 
@@ -373,29 +379,29 @@ export default function DoctorAiVideoDemo() {
                             <div
                               className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xs ${
                                 isAi
-                                  ? 'bg-[#12B886]/20 text-[#12B886] border border-[#12B886]/40'
-                                  : 'bg-[#232838] text-white'
+                                  ? 'bg-[#7C5CFC]/20 text-[#7C5CFC] border border-[#7C5CFC]/40'
+                                  : 'bg-white/5 text-white border border-white/10'
                               }`}
                             >
                               {isAi ? <Stethoscope className="w-5 h-5" /> : 'Patient'}
                             </div>
                             <div>
-                              <div className="text-xs font-bold text-white flex items-center gap-2">
+                              <div className="text-xs font-bold text-white flex items-center gap-2 font-['Outfit']">
                                 {isAi ? activePersonaName : item.speaker}
                                 {isAi && (
-                                  <span className="text-[10px] font-mono text-[#12B886] bg-[#12B886]/10 px-2 py-0.5 rounded">
-                                    Receptionist Active
+                                  <span className="text-[10px] font-mono text-[#14B8A6] bg-[#14B8A6]/15 px-2 py-0.5 rounded border border-[#14B8A6]/30">
+                                    Voice Agent Active
                                   </span>
                                 )}
                               </div>
-                              <span className="text-[10px] text-[#9CA3AF] font-mono">Timestamp {item.time}</span>
+                              <span className="text-[10px] text-[#8E9BB5] font-mono">Timestamp {item.time}</span>
                             </div>
                           </div>
                         </div>
 
                         {/* Live Caption Text Box */}
-                        <div className="bg-[#12161F] p-4 rounded-xl border border-[#232838] text-sm text-white leading-relaxed shadow-inner">
-                          <p className="italic text-[#F5F5F5]">"{formattedDisplay}"</p>
+                        <div className="bg-[#080D1C] p-4 rounded-xl border border-white/10 text-sm text-white leading-relaxed font-['DM_Sans']">
+                          <p className="italic text-[#F8FAFC]">"{formattedDisplay}"</p>
                         </div>
                       </motion.div>
                     );
@@ -404,13 +410,13 @@ export default function DoctorAiVideoDemo() {
               </div>
 
               {/* Custom Player Controls */}
-              <div className="pt-6 border-t border-[#232838] flex items-center justify-between gap-4 mt-6">
+              <div className="pt-6 border-t border-white/10 flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 mt-6">
                 <button
                   onClick={handlePlayToggle}
-                  className="flex items-center gap-2 bg-[#12B886] hover:bg-[#0E996F] text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all shadow-md"
+                  className="flex items-center gap-2 bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition-all shadow-md font-['Outfit'] hover:scale-105"
                 >
-                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                  <span>{isPlaying ? 'Pause Video' : 'Play Booking Video'}</span>
+                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-black" />}
+                  <span>{isPlaying ? 'Pause Demo' : 'Play Live Voice Demo'}</span>
                 </button>
 
                 {/* Progress Step Dots */}
@@ -420,7 +426,7 @@ export default function DoctorAiVideoDemo() {
                       key={idx}
                       onClick={() => { stopSpeech(); setCurrentStep(idx); setIsPlaying(false); }}
                       className={`h-2 rounded-full transition-all ${
-                        idx === currentStep ? 'w-6 bg-[#12B886]' : 'w-2 bg-[#232838]'
+                        idx === currentStep ? 'w-6 bg-[#D4AF37]' : 'w-2 bg-white/20'
                       }`}
                     />
                   ))}
@@ -428,7 +434,7 @@ export default function DoctorAiVideoDemo() {
 
                 <button
                   onClick={() => { stopSpeech(); setIsMuted(!isMuted); }}
-                  className="p-2 rounded-lg bg-[#12161F] border border-[#232838] text-[#9CA3AF] hover:text-white"
+                  className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-[#8E9BB5] hover:text-white"
                 >
                   {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                 </button>
@@ -437,56 +443,56 @@ export default function DoctorAiVideoDemo() {
             </div>
 
             {/* Right: Live Appointment Confirmation Screen (5 cols) */}
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#161D29] to-[#0D121B] p-6 rounded-2xl border border-[#12B886]/40 text-left space-y-5 shadow-xl relative">
+            <div className="lg:col-span-5 bg-gradient-to-br from-[#080D1C] to-[#050A14] p-6 rounded-2xl border border-white/10 text-left space-y-5 shadow-xl relative">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono font-bold uppercase text-[#12B886] bg-[#12B886]/10 px-3 py-1 rounded-full border border-[#12B886]/30">
-                  Real-time Calendar Output
+                <span className="text-[10px] font-mono font-bold uppercase text-[#D4AF37] bg-[#D4AF37]/15 px-3 py-1 rounded-full border border-[#D4AF37]/30">
+                  Real-time Calendar Telemetry
                 </span>
-                <span className="text-xs font-mono text-[#D4AF6A] flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Scheduled
+                <span className="text-xs font-mono text-[#14B8A6] flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Confirmed
                 </span>
               </div>
 
-              <div className="border-b border-[#232838] pb-4">
-                <p className="text-xs text-[#9CA3AF]">Attending Physician</p>
-                <h4 className="text-lg font-bold text-white">{activeScenario.doctor}</h4>
-                <p className="text-xs text-[#12B886]">{activeScenario.clinicName}</p>
+              <div className="border-b border-white/10 pb-4">
+                <p className="text-xs text-[#8E9BB5]">Attending Physician</p>
+                <h4 className="text-lg font-bold text-white font-['Outfit']">{activeScenario.doctor}</h4>
+                <p className="text-xs text-[#7C5CFC]">{activeScenario.clinicName}</p>
               </div>
 
-              <div className="space-y-3 text-xs">
+              <div className="space-y-3 text-xs font-['DM_Sans']">
                 <div className="flex items-center justify-between">
-                  <span className="text-[#9CA3AF] flex items-center gap-2">
-                    <UserCheck className="w-4 h-4 text-[#D4AF6A]" /> Patient Name:
+                  <span className="text-[#8E9BB5] flex items-center gap-2">
+                    <UserCheck className="w-4 h-4 text-[#D4AF37]" /> Patient Name:
                   </span>
-                  <span className="font-semibold text-white">{activeScenario.patient}</span>
+                  <span className="font-bold text-white">{activeScenario.patient}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-[#9CA3AF] flex items-center gap-2">
-                    <PhoneCall className="w-4 h-4 text-[#D4AF6A]" /> Mobile SMS Phone:
+                  <span className="text-[#8E9BB5] flex items-center gap-2">
+                    <PhoneCall className="w-4 h-4 text-[#D4AF37]" /> Mobile SMS Phone:
                   </span>
-                  <span className="font-semibold text-white font-mono">{activeScenario.phone}</span>
+                  <span className="font-bold text-white font-mono">{activeScenario.phone}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-[#9CA3AF] flex items-center gap-2">
-                    <Stethoscope className="w-4 h-4 text-[#12B886]" /> Consultation Reason:
+                  <span className="text-[#8E9BB5] flex items-center gap-2">
+                    <Stethoscope className="w-4 h-4 text-[#7C5CFC]" /> Consultation Reason:
                   </span>
-                  <span className="font-semibold text-white">{activeScenario.reason}</span>
+                  <span className="font-bold text-white">{activeScenario.reason}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-[#9CA3AF] flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-[#12B886]" /> Confirmed Slot:
+                  <span className="text-[#8E9BB5] flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-[#14B8A6]" /> Confirmed Slot:
                   </span>
-                  <span className="font-semibold text-[#12B886] font-mono">{activeScenario.bookedSlot}</span>
+                  <span className="font-bold text-[#14B8A6] font-mono">{activeScenario.bookedSlot}</span>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#232838] bg-[#0A0E14]/80 p-3 rounded-xl border border-[#232838] text-[11px] text-[#9CA3AF] space-y-1">
+              <div className="pt-4 border-t border-white/10 bg-[#050A14] p-3.5 rounded-xl border border-white/10 text-[11px] text-[#8E9BB5] space-y-1 font-mono">
                 <div className="flex items-center justify-between text-white font-medium">
                   <span>Automated Workflow Triggered:</span>
-                  <span className="text-[#12B886]">100% Automated</span>
+                  <span className="text-[#14B8A6]">100% Autonomous</span>
                 </div>
                 <p>&bull; Google Calendar Event Created</p>
                 <p>&bull; Pre-appointment Patient SMS Sent</p>
@@ -502,3 +508,4 @@ export default function DoctorAiVideoDemo() {
     </section>
   );
 }
+

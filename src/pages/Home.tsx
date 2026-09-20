@@ -1,24 +1,28 @@
 import React from 'react';
 import Hero from '../components/home/Hero';
-import ServicesGrid from '../components/home/ServicesGrid';
-import DoctorAiVideoDemo from '../components/home/DoctorAiVideoDemo';
-import WhyChooseUs from '../components/home/WhyChooseUs';
+import MarqueeTicker from '../components/home/MarqueeTicker';
+import InteractiveShowcase from '../components/home/InteractiveShowcase';
 import AnimatedStats from '../components/home/AnimatedStats';
+import RoiCalculator from '../components/home/RoiCalculator';
+import DoctorAiVideoDemo from '../components/home/DoctorAiVideoDemo';
 import ProcessTimeline from '../components/home/ProcessTimeline';
-import Testimonials from '../components/home/Testimonials';
+import FaqSection from '../components/home/FaqSection';
 import CtaBanner from '../components/home/CtaBanner';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0A0E14]">
+    <main className="min-h-screen bg-[#050A14] text-white">
       <Hero />
-      <ServicesGrid />
-      <DoctorAiVideoDemo />
-      <WhyChooseUs />
+      <MarqueeTicker />
       <AnimatedStats />
+      <InteractiveShowcase />
+      <RoiCalculator />
+      <DoctorAiVideoDemo />
       <ProcessTimeline />
-      <Testimonials />
+      <FaqSection />
       <CtaBanner />
     </main>
   );
 }
+
+

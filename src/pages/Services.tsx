@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { Bot, Globe, Smartphone, TrendingUp, Check, ArrowRight, ShieldCheck, Zap, Layers, Clock, Cpu, Code2 } from 'lucide-react';
+import { Bot, Globe, Smartphone, TrendingUp, Check, ArrowRight, ShieldCheck, Zap, Layers, Clock, Cpu, Code2, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import GoBackButton from '../components/ui/GoBackButton';
 
@@ -33,8 +33,8 @@ export default function Services() {
         '24/7 availability with zero missed phone calls',
       ],
       techSpecs: ['OpenAI / Anthropic LLM Engine', 'Twilio Voice API', 'WebSockets Real-time Audio', 'Python / Node Telemetry'],
-      badge: 'POPULAR CHOICE',
-      badgeColor: '#12B886',
+      badge: 'FLAGSHIP SOLUTION',
+      badgeColor: '#7C5CFC', // Violet
     },
     {
       id: 'web-development',
@@ -51,9 +51,9 @@ export default function Services() {
         'Integrated lead capture forms & booking widgets',
         'Enterprise SSL security & DDoS protection setup',
       ],
-      techSpecs: ['React 18 / Vite / Next.js', 'Tailwind CSS v4', 'Framer Motion', 'REST / GraphQL APIs'],
+      techSpecs: ['React 18 / Vite / Next.js', 'Tailwind CSS', 'Framer Motion', 'REST / GraphQL APIs'],
       badge: 'AGENCY CRAFT',
-      badgeColor: '#D4AF6A',
+      badgeColor: '#D4AF37', // Gold
     },
     {
       id: 'app-development',
@@ -72,7 +72,7 @@ export default function Services() {
       ],
       techSpecs: ['React Native / Flutter', 'TypeScript', 'Firebase / Supabase', 'Apple & Android SDKs'],
       badge: 'MOBILE SUITE',
-      badgeColor: '#12B886',
+      badgeColor: '#14B8A6', // Teal
     },
     {
       id: 'growth-systems',
@@ -91,21 +91,17 @@ export default function Services() {
       ],
       techSpecs: ['Automated CRM Pipelines', 'Google Tag Manager & Analytics', 'Stripe Payments', 'Webhook Automations'],
       badge: 'REVENUE SCALING',
-      badgeColor: '#D4AF6A',
+      badgeColor: '#F43F5E', // Rose
     },
   ];
 
   return (
-    <main className="pt-28 pb-24 bg-[#0A0E14] text-[#F5F5F5] min-h-screen">
+    <main className="pt-28 pb-24 bg-[#050A14] text-[#F8FAFC] min-h-screen bg-tech-grid font-['DM_Sans']">
       
       {/* Services Page Hero */}
-      <section className="relative py-16 border-b border-[#232838] radial-glow-emerald overflow-hidden">
-        {/* Background Image Layer */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity pointer-events-none"
-          style={{ backgroundImage: `url('/images/services_bg_pattern.png')` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0E14]/80 via-[#0A0E14]/70 to-[#0A0E14] pointer-events-none" />
+      <section className="relative py-20 border-b border-white/10 overflow-hidden">
+        {/* Ambient background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[#7C5CFC]/10 blur-[200px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex justify-start mb-6">
@@ -113,13 +109,21 @@ export default function Services() {
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#12B886] bg-[#12B886]/10 px-3.5 py-1.5 rounded-full border border-[#12B886]/30 inline-block mb-4">
-              OUR CORE SOLUTIONS
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
-              Specialized Tech Services Built for <span className="text-gradient-emerald">Maximum Impact</span>
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-5"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                OUR CORE SOLUTIONS
+              </span>
+            </motion.div>
+
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight font-['Syne'] uppercase leading-[0.95]">
+              Specialized Tech Services Built for <span className="text-gradient-gold">Maximum Impact</span>
             </h1>
-            <p className="mt-4 text-[#9CA3AF] text-sm sm:text-base md:text-lg leading-relaxed">
+            <p className="mt-6 text-[#8E9BB5] text-sm sm:text-base md:text-lg leading-relaxed font-['DM_Sans']">
               Discover how Safer Solutions combines voice AI automation, custom software development, and online growth systems to build resilient, scaling businesses.
             </p>
           </div>
@@ -127,7 +131,7 @@ export default function Services() {
       </section>
 
       {/* Services Deep Dive List */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-24">
         {serviceSections.map((section, idx) => {
           const Icon = section.icon;
           const isEven = idx % 2 === 0;
@@ -136,19 +140,23 @@ export default function Services() {
             <section
               key={section.id}
               id={section.id}
-              className="scroll-mt-32 glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden border border-[#232838] hover:border-[#12B886]/30 transition-colors"
+              className="scroll-mt-32 bento-card rounded-3xl p-8 sm:p-12 relative overflow-hidden bg-[#080D1C]/85 border border-white/10 backdrop-blur-md transition-all"
+              style={{ borderColor: `${section.badgeColor}30` }}
             >
               <div className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}>
                 
                 {/* Text Details (7 cols) */}
                 <div className={`lg:col-span-7 ${isEven ? '' : 'lg:order-2'}`}>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-[#161D2A] border border-[#232838] flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-[#12B886]" />
+                    <div 
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md"
+                      style={{ background: `${section.badgeColor}20`, border: `1px solid ${section.badgeColor}40`, color: section.badgeColor }}
+                    >
+                      <Icon className="w-6 h-6" />
                     </div>
                     <div>
                       <span
-                        className="text-[10px] font-mono font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full border"
+                        className="text-[10px] font-mono font-bold tracking-widest uppercase px-3 py-0.5 rounded-full border"
                         style={{
                           color: section.badgeColor,
                           backgroundColor: `${section.badgeColor}15`,
@@ -157,42 +165,42 @@ export default function Services() {
                       >
                         {section.badge}
                       </span>
-                      <p className="text-xs text-[#9CA3AF] font-medium mt-0.5">
+                      <p className="text-xs text-[#8E9BB5] font-medium mt-1 font-['DM_Sans']">
                         {section.subtitle}
                       </p>
                     </div>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight mb-4 font-['Syne'] uppercase">
                     {section.title}
                   </h2>
 
-                  <p className="text-[#9CA3AF] text-sm sm:text-base leading-relaxed mb-6">
+                  <p className="text-[#8E9BB5] text-sm sm:text-base leading-relaxed mb-8 font-['DM_Sans']">
                     {section.description}
                   </p>
 
                   {/* Highlights Checklist */}
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-white mb-3 flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-[#D4AF6A]" />
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-white mb-4 flex items-center gap-2 font-['Outfit']">
+                    <Zap className="w-4 h-4 text-[#D4AF37]" />
                     <span>Key Capabilities & Benefits</span>
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                     {section.highlights.map((item, hIdx) => (
-                      <div key={hIdx} className="flex items-start gap-2.5 text-xs text-[#F5F5F5] bg-[#0A0E14] p-3 rounded-xl border border-[#232838]">
-                        <Check className="w-4 h-4 text-[#12B886] shrink-0 mt-0.5" />
+                      <div key={hIdx} className="flex items-start gap-2.5 text-xs text-[#CBD5E1] bg-[#050A14] p-3.5 rounded-xl border border-white/10 font-['DM_Sans']">
+                        <Check className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
                         <span>{item}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* Tech Specs Badges */}
-                  <div className="pt-6 border-t border-[#232838] flex flex-wrap items-center justify-between gap-4">
+                  <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[11px] text-[#9CA3AF] font-mono mr-1">Stack:</span>
+                      <span className="text-[11px] text-[#8E9BB5] font-mono mr-1">Stack:</span>
                       {section.techSpecs.map((tech, tIdx) => (
                         <span
                           key={tIdx}
-                          className="text-[11px] font-mono text-white bg-[#12161F] border border-[#232838] px-2.5 py-1 rounded-md"
+                          className="text-[11px] font-mono text-white bg-[#050A14] border border-white/10 px-2.5 py-1 rounded-lg"
                         >
                           {tech}
                         </span>
@@ -201,9 +209,9 @@ export default function Services() {
 
                     <Link
                       to="/contact"
-                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#12B886] hover:text-white transition-colors"
+                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:text-white transition-colors font-['Outfit']"
                     >
-                      <span>Inquire About {section.title.split(' ')[0]}</span>
+                      <span>Inquire Now</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
@@ -211,11 +219,11 @@ export default function Services() {
 
                 {/* Visual Image Preview (5 cols) */}
                 <div className={`lg:col-span-5 ${isEven ? '' : 'lg:order-1'}`}>
-                  <div className="rounded-2xl p-1 bg-gradient-to-b from-[#232838] to-[#12161F] shadow-xl overflow-hidden group">
+                  <div className="rounded-2xl p-1 bg-gradient-to-b from-white/15 to-white/5 shadow-2xl overflow-hidden group">
                     <img
                       src={section.image}
                       alt={section.title}
-                      className="w-full h-auto rounded-xl block border border-[#232838] group-hover:scale-102 transition-transform duration-500"
+                      className="w-full h-auto rounded-xl block border border-white/10 group-hover:scale-103 transition-transform duration-700"
                     />
                   </div>
                 </div>
@@ -227,19 +235,19 @@ export default function Services() {
       </div>
 
       {/* Comparison / Tiers Summary */}
-      <section className="py-16 bg-[#080B10] border-t border-[#232838]">
+      <section className="py-20 bg-[#080D1C]/50 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-extrabold text-white mb-4">
-            Need a Combined Solution?
+          <h2 className="text-3xl font-black text-white font-['Syne'] uppercase mb-4">
+            Need a Combined Enterprise Suite?
           </h2>
-          <p className="text-[#9CA3AF] text-sm max-w-xl mx-auto mb-8">
-            Many clients bundle our <strong>AI Receptionist</strong> with a <strong>Custom Website</strong> and <strong>Growth System</strong> for maximum conversion speed.
+          <p className="text-[#8E9BB5] text-sm max-w-xl mx-auto mb-8 font-['DM_Sans']">
+            Bundle your <strong>AI Receptionist</strong> with a <strong>Custom Website</strong> and <strong>Growth System</strong> for maximum conversion velocity.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-3 bg-[#12B886] hover:bg-[#0E996F] text-white text-sm font-bold uppercase tracking-wider px-8 py-3.5 rounded-xl shadow-lg shadow-[#12B886]/20 transition-all"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-xl hover:scale-105 transition-all font-['Outfit']"
           >
-            <span>Request a Tailored Proposal</span>
+            <span>Request a Custom Proposal</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -248,3 +256,4 @@ export default function Services() {
     </main>
   );
 }
+
