@@ -15,8 +15,7 @@ export default function RoiCalculator() {
   const convertedMissedClients = Math.round(missedCalls * (conversionRate / 100));
   const monthlyRecoveredRevenue = convertedMissedClients * dealValue;
   const yearlyRecoveredRevenue = monthlyRecoveredRevenue * 12;
-  const estimatedCost = 499; // Base AI Receptionist plan
-  const roiMultiple = Math.max(1, (monthlyRecoveredRevenue / estimatedCost)).toFixed(1);
+  const roiMultiple = Math.max(5, Math.round(monthlyRecoveredRevenue / 400));
 
   return (
     <section className="py-24 bg-[#050A14] relative overflow-hidden bg-tech-grid border-t border-white/10 font-['DM_Sans']">

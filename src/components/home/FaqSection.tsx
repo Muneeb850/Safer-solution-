@@ -24,8 +24,8 @@ const faqs = [
   },
   {
     icon: DollarSign,
-    q: 'What does it cost?',
-    a: 'AI Receptionist plans start at $499/month and scale based on call volume and integrations. Custom web and mobile app projects are scoped individually. All engagements include a free 15-minute strategy consultation where we calculate your expected ROI before you commit to anything.',
+    q: 'How are your services priced?',
+    a: 'Every solution we build is custom-tailored to your business needs, call volume, and technical requirements. We provide transparent, custom quotes during our initial 15-minute strategy consultation, ensuring you receive maximum ROI with zero hidden fees.',
     color: '#F43F5E', // Rose
   },
   {
@@ -43,7 +43,7 @@ const faqs = [
   {
     icon: Users,
     q: 'Can I customise the AI\'s voice and personality?',
-    a: 'Yes — we build a completely custom voice persona for your business. You choose the name, speaking style (professional, warm, energetic), and we train the AI on your exact services, pricing, team members, and FAQs. You can also select from our library of 5 natural voice profiles or clone your own receptionist\'s voice.',
+    a: 'Yes — we build a completely custom voice persona for your business. You choose the name, speaking style (professional, warm, energetic), and we train the AI on your exact services, business offerings, team members, and FAQs. You can also select from our library of 5 natural voice profiles or clone your own receptionist\'s voice.',
     color: '#14B8A6', // Teal
   },
   {

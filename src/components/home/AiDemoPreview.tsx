@@ -315,8 +315,8 @@ export default function AiDemoPreview() {
                         <span className="text-[#12B886] font-semibold font-mono">${monthlyRevenueRecovered.toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-[#9CA3AF]">AI Receptionist Cost:</span>
-                        <span className="text-[#D4AF6A] font-semibold">Fraction of 1 Front-Desk Salary</span>
+                        <span className="text-[#9CA3AF]">24/7 Call Coverage:</span>
+                        <span className="text-[#12B886] font-semibold">100% Automated</span>
                       </div>
                     </div>
 

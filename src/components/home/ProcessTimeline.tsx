@@ -19,7 +19,7 @@ const steps = [
     icon: PenTool,
     title: 'Design & Engineering',
     subtitle: 'Day 3–4',
-    description: 'We construct your custom web/mobile apps and train your AI Receptionist on your exact services, pricing, and FAQs.',
+    description: 'We construct your custom web/mobile apps and train your AI Receptionist on your exact services, business offerings, and FAQs.',
     image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&auto=format&fit=crop&q=80',
     accent: '#D4AF37', // Gold
     side: 'right' as const,

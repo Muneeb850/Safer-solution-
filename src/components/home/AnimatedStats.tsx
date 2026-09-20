@@ -6,7 +6,7 @@ const stats = [
   { value: 4.8, prefix: '$', suffix: 'M+', label: 'Recovered Revenue', sub: 'Captured from missed-call leads', color: '#7C5CFC' },
   { value: 500, suffix: '+', label: 'Projects Deployed', sub: 'Web, mobile & AI systems', color: '#D4AF37' },
   { value: 99.8, suffix: '%', decimals: 1, label: 'AI Call Resolution', sub: 'Accurate intent & scheduling', color: '#14B8A6' },
-  { value: 15, suffix: '×', label: 'Average Client ROI', sub: 'Revenue vs. monthly plan cost', color: '#F43F5E' },
+  { value: 15, suffix: '×', label: 'Average Client ROI', sub: 'Bottom-line revenue growth', color: '#F43F5E' },
 ];
 
 function AnimatedNumber({ to, prefix = '', suffix = '', decimals = 0, color }: {
