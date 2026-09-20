@@ -99,54 +99,55 @@ export default function ServicesGrid() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card glass-card-hover rounded-3xl p-8 flex flex-col justify-between group border border-[#1E293B] hover:border-[#06B6D4]/60 shadow-xl"
               >
-                <div>
-                  {/* Card Top */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-[#030712] border border-[#1E293B] flex items-center justify-center group-hover:border-[#06B6D4]/60 transition-colors shadow-inner">
-                      <Icon className="w-7 h-7 text-[#06B6D4] group-hover:scale-110 transition-transform" />
+                <Link
+                  to={`/services#${service.id}`}
+                  className="glass-card glass-card-hover rounded-3xl p-8 flex flex-col justify-between group border border-[#1E293B] hover:border-[#06B6D4]/60 shadow-xl h-full block cursor-pointer"
+                >
+                  <div>
+                    {/* Card Top */}
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="w-14 h-14 rounded-2xl bg-[#030712] border border-[#1E293B] flex items-center justify-center group-hover:border-[#06B6D4]/60 transition-colors shadow-inner">
+                        <Icon className="w-7 h-7 text-[#06B6D4] group-hover:scale-110 transition-transform" />
+                      </div>
+                      <span className="text-[11px] font-mono font-bold text-[#06B6D4] bg-[#06B6D4]/10 px-3 py-1 rounded-full border border-[#06B6D4]/30">
+                        0{index + 1} &bull; SERVICE
+                      </span>
                     </div>
-                    <span className="text-[11px] font-mono font-bold text-[#06B6D4] bg-[#06B6D4]/10 px-3 py-1 rounded-full border border-[#06B6D4]/30">
-                      0{index + 1} &bull; SERVICE
-                    </span>
+
+                    {/* Title & Tagline */}
+                    <h3 className="text-2xl font-bold text-white group-hover:text-[#06B6D4] transition-colors font-['Outfit']">
+                      {service.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-[#10B981] mt-1 mb-4">
+                      {service.tagline}
+                    </p>
+                    <p className="text-[#94A3B8] text-sm leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+
+                    {/* Feature Checklist */}
+                    <ul className="space-y-2.5 mb-8">
+                      {service.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="flex items-center gap-2.5 text-xs text-[#F8FAFC]">
+                          <div className="w-4 h-4 rounded-full bg-[#06B6D4]/15 border border-[#06B6D4]/40 flex items-center justify-center shrink-0">
+                            <Check className="w-2.5 h-2.5 text-[#06B6D4]" />
+                          </div>
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  {/* Title & Tagline */}
-                  <h3 className="text-2xl font-bold text-white group-hover:text-[#06B6D4] transition-colors font-['Outfit']">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs font-semibold text-[#10B981] mt-1 mb-4">
-                    {service.tagline}
-                  </p>
-                  <p className="text-[#94A3B8] text-sm leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-
-                  {/* Feature Checklist */}
-                  <ul className="space-y-2.5 mb-8">
-                    {service.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-2.5 text-xs text-[#F8FAFC]">
-                        <div className="w-4 h-4 rounded-full bg-[#06B6D4]/15 border border-[#06B6D4]/40 flex items-center justify-center shrink-0">
-                          <Check className="w-2.5 h-2.5 text-[#06B6D4]" />
-                        </div>
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Learn More Link */}
-                <div className="pt-6 border-t border-[#1E293B] flex items-center justify-between">
-                  <Link
-                    to={`/services#${service.id}`}
-                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white group-hover:text-[#06B6D4] transition-colors"
-                  >
-                    <span>Learn More & Specs</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                  <span className="w-2 h-2 rounded-full bg-[#1E293B] group-hover:bg-[#06B6D4] transition-colors" />
-                </div>
+                  {/* Learn More Link */}
+                  <div className="pt-6 border-t border-[#1E293B] flex items-center justify-between">
+                    <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white group-hover:text-[#06B6D4] transition-colors">
+                      <span>Learn More & Specs</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <span className="w-2 h-2 rounded-full bg-[#1E293B] group-hover:bg-[#06B6D4] transition-colors" />
+                  </div>
+                </Link>
               </motion.div>
             );
           })}

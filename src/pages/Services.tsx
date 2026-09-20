@@ -9,10 +9,16 @@ export default function Services() {
 
   useEffect(() => {
     if (hash) {
-      const element = document.querySelector(hash);
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const timer = setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 120);
+        return () => clearTimeout(timer);
       }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [hash]);
 

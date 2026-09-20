@@ -38,6 +38,7 @@ const features = {
 const cards = [
   {
     id: 'ai',
+    targetId: 'ai-receptionist',
     icon: Bot,
     tag: 'VOICE AI ENGINE',
     title: 'AI Voice\nReceptionist',
@@ -50,6 +51,7 @@ const cards = [
   },
   {
     id: 'web',
+    targetId: 'web-development',
     icon: Globe,
     tag: 'WEB DEVELOPMENT',
     title: 'Custom Web Apps',
@@ -62,6 +64,7 @@ const cards = [
   },
   {
     id: 'app',
+    targetId: 'app-development',
     icon: Smartphone,
     tag: 'MOBILE SUITE',
     title: 'iOS & Android Apps',
@@ -74,6 +77,7 @@ const cards = [
   },
   {
     id: 'growth',
+    targetId: 'growth-systems',
     icon: TrendingUp,
     tag: 'REVENUE ENGINE',
     title: 'Automated Growth Systems',
@@ -133,101 +137,104 @@ export default function InteractiveShowcase() {
             const isActive = active === card.id;
             const feats = features[card.id as CardId];
             return (
-              <motion.button
+              <motion.div
                 key={card.id}
                 layout
-                onClick={() => setActive(card.id as CardId)}
-                className={`bento-card relative overflow-hidden rounded-2xl text-left p-5 cursor-pointer min-h-[220px] ${card.colSpan} ${card.rowSpan}`}
-                style={{
-                  background: `linear-gradient(145deg, ${card.gradientFrom}, rgba(8,13,28,0.97))`,
-                  boxShadow: isActive ? `0 0 50px -12px ${card.accent}50` : undefined,
-                  borderColor: isActive ? `${card.accent}50` : undefined,
-                }}
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.2 }}
+                onMouseEnter={() => setActive(card.id as CardId)}
+                className={`${card.colSpan} ${card.rowSpan}`}
               >
-                {/* Background image thumbnail */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-500"
+                <Link
+                  to={`/services#${card.targetId}`}
+                  className="bento-card relative block h-full overflow-hidden rounded-2xl text-left p-5 cursor-pointer min-h-[220px]"
                   style={{
-                    backgroundImage: `url('${card.image}')`,
-                    opacity: isActive ? 0.06 : 0.03,
-                    mixBlendMode: 'screen',
+                    background: `linear-gradient(145deg, ${card.gradientFrom}, rgba(8,13,28,0.97))`,
+                    boxShadow: isActive ? `0 0 50px -12px ${card.accent}50` : undefined,
+                    borderColor: isActive ? `${card.accent}50` : undefined,
                   }}
-                />
-
-                {/* Active glow */}
-                {isActive && (
-                  <motion.div
-                    layoutId="bento-glow"
-                    className="absolute inset-0 rounded-2xl pointer-events-none"
-                    style={{ background: `radial-gradient(circle at 25% 25%, ${card.accent}20, transparent 65%)` }}
-                  />
-                )}
-
-                {/* Top: tag + icon */}
-                <div className="flex items-center justify-between mb-4 relative z-10">
-                  <span className="text-[9px] font-['Space_Grotesk'] font-bold tracking-[0.18em] uppercase" style={{ color: card.accent }}>
-                    {card.tag}
-                  </span>
-                  <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center border"
-                    style={{ background: `${card.accent}18`, borderColor: `${card.accent}40`, color: card.accent }}
-                  >
-                    <Icon className="w-4.5 h-4.5" />
-                  </div>
-                </div>
-
-                {/* Title */}
-                <h3
-                  className="font-['Syne'] font-bold text-white leading-tight relative z-10"
-                  style={{ fontSize: card.large ? 'clamp(22px, 2.5vw, 30px)' : '17px', whiteSpace: 'pre-line' }}
                 >
-                  {card.title}
-                </h3>
-
-                {/* Features list */}
-                <AnimatePresence>
-                  {(card.large || isActive) && (
-                    <motion.ul
-                      key={`feat-${card.id}`}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      transition={{ duration: 0.25 }}
-                      className="mt-4 space-y-1.5 relative z-10"
-                    >
-                      {feats.map((f) => (
-                        <li key={f} className="flex items-start gap-2 text-[11px] text-[#8E9BB5]">
-                          <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{ color: card.accent }} />
-                          {f}
-                        </li>
-                      ))}
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
-
-                {/* Bottom arrow */}
-                <div className="absolute bottom-4 right-5 z-10">
-                  <ArrowRight
-                    className="w-4 h-4 transition-all duration-300"
-                    style={{ color: isActive ? card.accent : '#4E5D7A' }}
+                  {/* Background image thumbnail */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center pointer-events-none transition-opacity duration-500"
+                    style={{
+                      backgroundImage: `url('${card.image}')`,
+                      opacity: isActive ? 0.06 : 0.03,
+                      mixBlendMode: 'screen',
+                    }}
                   />
-                </div>
 
-                {/* Active pulse dot */}
-                {isActive && (
-                  <span
-                    className="absolute top-4 left-4 w-2 h-2 rounded-full z-10"
-                    style={{ background: card.accent, boxShadow: `0 0 8px ${card.accent}` }}
-                  >
-                    <span
-                      className="absolute inset-0 rounded-full animate-ping"
-                      style={{ background: card.accent, opacity: 0.4 }}
+                  {/* Active glow */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="bento-glow"
+                      className="absolute inset-0 rounded-2xl pointer-events-none"
+                      style={{ background: `radial-gradient(circle at 25% 25%, ${card.accent}20, transparent 65%)` }}
                     />
-                  </span>
-                )}
-              </motion.button>
+                  )}
+
+                  {/* Top: tag + icon */}
+                  <div className="flex items-center justify-between mb-4 relative z-10">
+                    <span className="text-[9px] font-['Space_Grotesk'] font-bold tracking-[0.18em] uppercase" style={{ color: card.accent }}>
+                      {card.tag}
+                    </span>
+                    <div
+                      className="w-9 h-9 rounded-xl flex items-center justify-center border"
+                      style={{ background: `${card.accent}18`, borderColor: `${card.accent}40`, color: card.accent }}
+                    >
+                      <Icon className="w-4.5 h-4.5" />
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3
+                    className="font-['Syne'] font-bold text-white leading-tight relative z-10"
+                    style={{ fontSize: card.large ? 'clamp(22px, 2.5vw, 30px)' : '17px', whiteSpace: 'pre-line' }}
+                  >
+                    {card.title}
+                  </h3>
+
+                  {/* Features list */}
+                  <AnimatePresence>
+                    {(card.large || isActive) && (
+                      <motion.ul
+                        key={`feat-${card.id}`}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.25 }}
+                        className="mt-4 space-y-1.5 relative z-10"
+                      >
+                        {feats.map((f) => (
+                          <li key={f} className="flex items-start gap-2 text-[11px] text-[#8E9BB5]">
+                            <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{ color: card.accent }} />
+                            {f}
+                          </li>
+                        ))}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Bottom arrow */}
+                  <div className="absolute bottom-4 right-5 z-10 flex items-center gap-1.5 text-xs font-bold font-mono uppercase tracking-wider" style={{ color: isActive ? card.accent : '#4E5D7A' }}>
+                    <span className="hidden sm:inline opacity-80 group-hover:opacity-100">View Specs</span>
+                    <ArrowRight
+                      className="w-4 h-4 transition-all duration-300"
+                    />
+                  </div>
+
+                  {/* Active pulse dot */}
+                  {isActive && (
+                    <span
+                      className="absolute top-4 left-4 w-2 h-2 rounded-full z-10"
+                      style={{ background: card.accent, boxShadow: `0 0 8px ${card.accent}` }}
+                    >
+                      <span
+                        className="absolute inset-0 rounded-full animate-ping"
+                        style={{ background: card.accent, opacity: 0.4 }}
+                      />
+                    </span>
+                  )}
+                </Link>
+              </motion.div>
             );
           })}
         </div>
