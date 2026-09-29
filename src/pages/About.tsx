@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Lock, Zap, Users, Target, CheckCircle2, Eye, ArrowRight, Sparkles } from 'lucide-react';
+import { Lock, Zap, Users, Target, CheckCircle2, Eye, ArrowRight } from 'lucide-react';
 import GoBackButton from '../components/ui/GoBackButton';
 
 export default function About() {
@@ -46,8 +46,7 @@ export default function About() {
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
-              <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
+            <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
               <span>About Safer Solution</span>
             </div>
 

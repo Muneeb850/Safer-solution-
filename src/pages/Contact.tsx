@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import GoBackButton from '../components/ui/GoBackButton';
 
@@ -37,8 +37,7 @@ export default function Contact() {
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
-              <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
+            <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
               <span>Let's Connect</span>
             </div>
 

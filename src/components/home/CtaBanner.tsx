@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, PhoneCall, Mail, MapPin, Sparkles } from 'lucide-react';
+import { ArrowRight, PhoneCall, Mail, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function CtaBanner() {
@@ -35,9 +35,8 @@ export default function CtaBanner() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/10 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-6"
+              className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-white/10 border border-white/10 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-6"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               <span>Start Your Transformation</span>
             </motion.div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, PenTool, Cpu, TrendingUp, Sparkles } from 'lucide-react';
+import { Search, PenTool, Cpu, TrendingUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const steps = [
@@ -45,7 +45,6 @@ export default function ProcessTimeline() {
         {/* Section header */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
             <span>Proven Deployment Framework</span>
           </div>
           

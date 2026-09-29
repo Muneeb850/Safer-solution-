@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, CheckCircle2, ArrowRight, X, Sparkles } from 'lucide-react';
+import { ExternalLink, CheckCircle2, ArrowRight, X } from 'lucide-react';
 import GoBackButton from '../components/ui/GoBackButton';
 
 export default function Portfolio() {
@@ -91,8 +91,7 @@ export default function Portfolio() {
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
-              <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
+            <div className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
               <span>Our Case Studies</span>
             </div>
 

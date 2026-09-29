@@ -83,18 +83,11 @@ const cards = [
 type CardId = 'ai' | 'web' | 'app' | 'growth';
 
 export default function InteractiveShowcase() {
-  const [expandedCards, setExpandedCards] = useState<Record<CardId, boolean>>({
-    ai: false,
-    web: false,
-    app: false,
-    growth: false,
-  });
+  // Single active expanded card state: Exactly one card opens at a time!
+  const [expandedCard, setExpandedCard] = useState<CardId | null>(null);
 
   const toggleCard = (id: CardId) => {
-    setExpandedCards((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+    setExpandedCard((prev) => (prev === id ? null : id));
   };
 
   return (
@@ -104,9 +97,8 @@ export default function InteractiveShowcase() {
         {/* Section Header */}
         <div className="mb-12 sm:mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C59B6D]" />
-              Enterprise Solutions
+            <span className="inline-flex items-center px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-4">
+              <span>Enterprise Solutions</span>
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
               Engineered for Speed, Scale & Revenue.
@@ -117,12 +109,12 @@ export default function InteractiveShowcase() {
           </p>
         </div>
 
-        {/* Responsive Grid: Larger & Spacious for Desktop (lg:grid-cols-2 lg:gap-8) / Preserved for Mobile (grid-cols-1) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+        {/* Responsive Grid: items-start guarantees only ONE card expands downward while the other remains compact */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {cards.map((card) => {
             const Icon = card.icon;
             const isDark = card.theme === 'dark';
-            const isExpanded = expandedCards[card.id as CardId];
+            const isExpanded = expandedCard === card.id;
             const feats = features[card.id as CardId];
             const pills = previewPills[card.id as CardId];
 
@@ -131,13 +123,13 @@ export default function InteractiveShowcase() {
                 key={card.id}
                 layout
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
-                className={`relative rounded-[22px] lg:rounded-[26px] transition-all duration-300 flex flex-col h-full ${
+                className={`relative rounded-[22px] lg:rounded-[26px] transition-all duration-300 flex flex-col ${
                   isDark
                     ? 'bg-[#0E1017] text-white border border-white/10 shadow-[0_20px_45px_-10px_rgba(0,0,0,0.5),0_8px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_28px_60px_-10px_rgba(0,0,0,0.65)] hover:-translate-y-1.5 hover:border-white/20'
                     : 'bg-white text-[#0F172A] border border-slate-200/90 shadow-[0_16px_36px_-8px_rgba(15,23,42,0.1),0_4px_12px_rgba(15,23,42,0.05)] hover:shadow-[0_24px_50px_-10px_rgba(15,23,42,0.18),0_8px_18px_rgba(15,23,42,0.06)] hover:-translate-y-1.5 hover:border-slate-300'
                 }`}
               >
-                <div className="p-5 sm:p-6 lg:p-8 flex flex-col justify-between h-full">
+                <div className="p-5 sm:p-6 lg:p-8 flex flex-col justify-between">
                   {/* Card Content */}
                   <div className="flex flex-col">
                     {/* Header: Tag + Icon */}
@@ -197,17 +189,17 @@ export default function InteractiveShowcase() {
                     </div>
                   </div>
 
-                  {/* "View Details" Toggle Button (Pinned to Bottom) */}
+                  {/* "View Details" Toggle Button - Colors matched to Live Demo gold gradient */}
                   <div className="pt-2.5 lg:pt-3 border-t border-slate-100 dark:border-white/5 mt-auto">
                     <button
                       onClick={() => toggleCard(card.id as CardId)}
                       className={`w-full py-2.5 lg:py-3 px-3.5 lg:px-4 rounded-xl text-xs lg:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer ${
                         isDark
                           ? isExpanded
-                            ? 'bg-amber-400 text-black font-extrabold shadow-sm'
+                            ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-extrabold shadow-md'
                             : 'bg-white/10 hover:bg-white/15 text-white border border-white/15'
                           : isExpanded
-                            ? 'bg-[#0F172A] text-white font-bold shadow-sm'
+                            ? 'bg-[#0F172A] text-white font-bold shadow-md'
                             : 'bg-slate-100 hover:bg-[#0F172A] hover:text-white text-[#0F172A] border border-slate-200'
                       }`}
                       aria-expanded={isExpanded}
@@ -238,7 +230,7 @@ export default function InteractiveShowcase() {
                         >
                           <span
                             className={`text-[10px] lg:text-[11px] uppercase font-bold tracking-wider block mb-3 ${
-                              isDark ? 'text-amber-300' : 'text-[#C59B6D]'
+                              isDark ? 'text-[#F5D061]' : 'text-[#C59B6D]'
                             }`}
                           >
                             Key Capabilities:
@@ -252,7 +244,7 @@ export default function InteractiveShowcase() {
                                 <span
                                   className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
                                     isDark
-                                      ? 'bg-amber-400/20 text-amber-300'
+                                      ? 'bg-[#D4AF37]/20 text-[#F5D061]'
                                       : 'bg-[#F5EBE1] text-[#A2672E]'
                                   }`}
                                 >
@@ -274,7 +266,7 @@ export default function InteractiveShowcase() {
                             to={`/services#${card.targetId}`}
                             className={`w-full inline-flex items-center justify-between text-xs lg:text-sm font-semibold py-2.5 px-3.5 lg:px-4 rounded-xl transition-colors ${
                               isDark
-                                ? 'bg-white/5 hover:bg-white/10 text-amber-300'
+                                ? 'bg-white/5 hover:bg-white/10 text-[#F5D061]'
                                 : 'bg-slate-50 hover:bg-slate-100 text-[#0F172A] border border-slate-200'
                             }`}
                           >

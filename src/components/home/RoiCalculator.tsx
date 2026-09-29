@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calculator, DollarSign, TrendingUp, PhoneCall, ArrowRight, Sparkles } from 'lucide-react';
+import { Calculator, DollarSign, TrendingUp, PhoneCall, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function RoiCalculator() {
@@ -22,7 +22,6 @@ export default function RoiCalculator() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
             <span>Interactive ROI Simulator</span>
           </div>
 

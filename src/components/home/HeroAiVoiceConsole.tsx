@@ -224,32 +224,29 @@ export default function HeroAiVoiceConsole() {
           <div className="flex items-center gap-1 bg-black/40 p-1 rounded-full border border-white/10">
             <button
               onClick={() => handleSelectIndustry('dentist')}
-              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-150 flex items-center gap-1.5 ${
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-150 flex items-center ${
                 selectedIndustry === 'dentist'
                   ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-extrabold shadow-sm'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              <span>🦷</span>
               <span>Dentist</span>
             </button>
             <button
               onClick={() => handleSelectIndustry('hvac')}
-              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-150 flex items-center gap-1.5 ${
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-150 flex items-center ${
                 selectedIndustry === 'hvac'
                   ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-extrabold shadow-sm'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              <span>❄️</span>
               <span>HVAC</span>
             </button>
           </div>
 
           {/* Voice Persona Selector (Sophia & Charlotte Only) */}
           <div className="flex items-center gap-1 bg-black/40 p-1 rounded-full border border-white/5">
-            <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1 px-1.5">
-              <span>🎤</span>
+            <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider flex items-center px-1.5">
               <span className="hidden md:inline">VOICE:</span>
             </span>
             {(['sophia', 'charlotte'] as const).map((voiceKey) => {
