@@ -15,7 +15,7 @@ export default function ScrollProgressBar() {
       className="fixed top-0 left-0 right-0 h-[3px] z-[9999] pointer-events-none"
       aria-hidden
     >
-      <div className="w-full h-full" style={{ background: 'linear-gradient(90deg, #6366F1, #8B5CF6, #EC4899)' }} />
+      <div className="w-full h-full" style={{ background: 'linear-gradient(90deg, #C59B6D, #D4AF37, #0F172A)' }} />
     </motion.div>
   );
 }

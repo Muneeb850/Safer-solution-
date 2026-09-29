@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, Bot, ChevronDown, ChevronUp, ShieldCheck, Sparkles } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ChevronDown, ChevronUp, Sparkles, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import GoBackButton from '../components/ui/GoBackButton';
 
 export default function Contact() {
@@ -8,19 +8,17 @@ export default function Contact() {
     name: '',
     email: '',
     phone: '',
-    service: 'AI Receptionist',
+    service: 'AI Voice Receptionist',
     message: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  // FAQ State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const faqs = [
     {
-      q: 'How fast can Safer Solutions AI Receptionist be deployed for our business?',
+      q: 'How fast can Safer Solution AI Receptionists be deployed?',
       a: 'Initial AI receptionist onboarding and custom prompt setup takes 3 to 5 business days. Full testing, phone number porting/forwarding, and CRM integration are completed within 7 business days.',
     },
     {
@@ -43,40 +41,32 @@ export default function Contact() {
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', service: 'AI Receptionist', message: '' });
+      setFormData({ name: '', email: '', phone: '', service: 'AI Voice Receptionist', message: '' });
       setTimeout(() => setIsSubmitted(false), 6000);
     }, 1200);
   };
 
   return (
-    <main className="pt-28 pb-24 bg-[#050A14] text-[#F8FAFC] min-h-screen bg-tech-grid font-['DM_Sans']">
+    <main className="pt-28 pb-24 bg-[#FAFAFC] text-[#0F172A] min-h-screen font-['Plus_Jakarta_Sans']">
       
       {/* Hero Header */}
-      <section className="relative py-20 border-b border-white/10 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[#7C5CFC]/10 blur-[200px] rounded-full pointer-events-none" />
-
+      <section className="relative py-16 sm:py-20 border-b border-slate-200/80 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex justify-start mb-6">
             <GoBackButton label="Back to Home" />
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                LET'S CONNECT
-              </span>
-            </motion.div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
+              <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
+              <span>Let's Connect</span>
+            </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight font-['Syne'] uppercase leading-[0.95]">
-              Book Your Strategy Session or <span className="text-gradient-gold">Call Us Direct</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F172A] tracking-tight leading-[1.08]">
+              Book Your Strategy Session or Call Us Direct
             </h1>
-            <p className="mt-6 text-[#8E9BB5] text-sm sm:text-base md:text-lg leading-relaxed font-['DM_Sans']">
-              Have questions about deploying an AI Receptionist or building a custom web/mobile platform? Our engineering team is standing by.
+            <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              Ready to automate inbound calls 24/7 or engineer custom web & mobile software? Our architecture team is here to assist.
             </p>
           </div>
         </div>
@@ -84,37 +74,33 @@ export default function Contact() {
 
       {/* Main Grid: Form + Info Cards */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
           
           {/* Contact Form (7 cols) */}
           <div className="lg:col-span-7">
-            <div className="bento-card rounded-3xl p-6 sm:p-10 bg-[#080D1C]/90 border border-white/10 backdrop-blur-md">
-              <h2 className="text-2xl font-black text-white mb-2 font-['Syne'] uppercase">
+            <div className="rounded-[28px] p-6 sm:p-10 bg-white border border-slate-200/90 shadow-sm">
+              <h2 className="text-2xl font-bold text-[#0F172A] mb-2 tracking-tight">
                 Send Us a Message
               </h2>
-              <p className="text-xs text-[#8E9BB5] mb-8 font-['DM_Sans']">
-                Fill out the form below and a solutions architect will contact you within 2 business hours.
+              <p className="text-sm text-slate-500 mb-8">
+                Fill out the form below and an engineer will contact you within 2 business hours.
               </p>
 
               {isSubmitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="bg-[#14B8A6]/10 border border-[#14B8A6]/40 rounded-2xl p-8 text-center space-y-4"
-                >
-                  <div className="w-16 h-16 rounded-full bg-[#14B8A6]/20 border border-[#14B8A6] flex items-center justify-center mx-auto text-[#14B8A6]">
-                    <CheckCircle2 className="w-8 h-8" />
+                <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-8 text-center space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mx-auto text-emerald-600">
+                    <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h3 className="text-xl font-bold text-white font-['Outfit']">Inquiry Received!</h3>
-                  <p className="text-xs text-[#8E9BB5] max-w-md mx-auto font-['DM_Sans']">
-                    Thank you for reaching out to Safer Solutions. A solution strategist will review your requirements and follow up via email/phone shortly.
+                  <h3 className="text-xl font-bold text-emerald-950">Inquiry Received!</h3>
+                  <p className="text-sm text-emerald-800 max-w-md mx-auto">
+                    Thank you for reaching out to Safer Solution. A solutions architect will review your requirements and follow up promptly.
                   </p>
-                </motion.div>
+                </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6 font-['DM_Sans']">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-xs font-bold text-[#8E9BB5] uppercase tracking-wider mb-2 font-mono">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                         Full Name *
                       </label>
                       <input
@@ -122,13 +108,13 @@ export default function Contact() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="John Doe"
-                        className="w-full bg-[#050A14] border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white placeholder-[#8E9BB5]/50 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                        placeholder="Sarah Jenkins"
+                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#0F172A] transition-colors"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#8E9BB5] uppercase tracking-wider mb-2 font-mono">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                         Business Email *
                       </label>
                       <input
@@ -136,15 +122,15 @@ export default function Contact() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="john@company.com"
-                        className="w-full bg-[#050A14] border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white placeholder-[#8E9BB5]/50 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                        placeholder="sarah@company.com"
+                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#0F172A] transition-colors"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-xs font-bold text-[#8E9BB5] uppercase tracking-wider mb-2 font-mono">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                         Phone Number *
                       </label>
                       <input
@@ -153,20 +139,20 @@ export default function Contact() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="(713) 364-5155"
-                        className="w-full bg-[#050A14] border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white placeholder-[#8E9BB5]/50 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#0F172A] transition-colors"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#8E9BB5] uppercase tracking-wider mb-2 font-mono">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                         Service Interested In *
                       </label>
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full bg-[#050A14] border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
+                        className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] focus:outline-none focus:border-[#0F172A] transition-colors"
                       >
-                        <option value="AI Receptionist">AI Receptionist (24/7 Call Automation)</option>
+                        <option value="AI Voice Receptionist">AI Voice Receptionist (24/7 Call Automation)</option>
                         <option value="Web Development">Web Development (Custom React/Next.js)</option>
                         <option value="App Development">App Development (iOS / Android)</option>
                         <option value="Growth Systems">Online Business Growth Systems</option>
@@ -176,7 +162,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#8E9BB5] uppercase tracking-wider mb-2 font-mono">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                       Project Goals & Details *
                     </label>
                     <textarea
@@ -184,22 +170,22 @@ export default function Contact() {
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Tell us about your current call volume, website goals, or software timeline..."
-                      className="w-full bg-[#050A14] border border-white/15 rounded-xl px-4 py-3.5 text-sm text-white placeholder-[#8E9BB5]/50 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                      placeholder="Tell us about your current call volume, customer workflows, or target launch date..."
+                      className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#0F172A] transition-colors"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black text-xs font-black uppercase tracking-wider py-4 rounded-xl shadow-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 font-['Outfit']"
+                    className="w-full rounded-full bg-[#111218] text-white text-sm font-semibold py-4 px-6 border border-[#C59B6D] hover:bg-[#1C1E27] shadow-md transition-all flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
-                      <span className="inline-block w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                      <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     ) : (
                       <>
-                        <Send className="w-4 h-4" />
                         <span>Submit Strategy Inquiry</span>
+                        <ArrowRight className="w-4 h-4" />
                       </>
                     )}
                   </button>
@@ -209,66 +195,66 @@ export default function Contact() {
           </div>
 
           {/* Contact Details & Info Cards (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-5">
             
             {/* Phone Card */}
             <a
               href="tel:713-364-5155"
-              className="bento-card rounded-2xl p-6 flex items-center gap-5 bg-[#080D1C]/80 border border-white/10 hover:border-[#D4AF37]/50 transition-all group block"
+              className="rounded-2xl p-6 flex items-center gap-5 bg-white border border-slate-200/90 hover:border-slate-300 shadow-xs hover:shadow-md transition-all group block"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#050A14] border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#D4AF37]">
-                <Phone className="w-6 h-6 text-[#D4AF37]" />
+              <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
+                <Phone className="w-5 h-5 text-[#C59B6D]" />
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#8E9BB5]">Direct Phone Support</span>
-                <h3 className="text-lg font-bold text-white group-hover:text-[#D4AF37] transition-colors font-['Outfit']">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Direct Phone Support</span>
+                <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-[#C59B6D] transition-colors">
                   (713) 364-5155
                 </h3>
-                <p className="text-xs text-[#8E9BB5]">Call or SMS direct for urgent inquiries</p>
+                <p className="text-xs text-slate-500">Call or SMS direct for immediate assistance</p>
               </div>
             </a>
 
             {/* Email Card */}
             <a
               href="mailto:safersolutionllc@gmail.com"
-              className="bento-card rounded-2xl p-6 flex items-center gap-5 bg-[#080D1C]/80 border border-white/10 hover:border-[#7C5CFC]/50 transition-all group block"
+              className="rounded-2xl p-6 flex items-center gap-5 bg-white border border-slate-200/90 hover:border-slate-300 shadow-xs hover:shadow-md transition-all group block"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#050A14] border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#7C5CFC]">
-                <Mail className="w-6 h-6 text-[#7C5CFC]" />
+              <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center shrink-0">
+                <Mail className="w-5 h-5 text-[#7C3AED]" />
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#8E9BB5]">Official Business Email</span>
-                <h3 className="text-sm font-bold text-white group-hover:text-[#7C5CFC] transition-colors font-['Outfit']">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Official Business Email</span>
+                <h3 className="text-sm font-bold text-[#0F172A] group-hover:text-[#7C3AED] transition-colors">
                   safersolutionllc@gmail.com
                 </h3>
-                <p className="text-xs text-[#8E9BB5]">Responses within 2 business hours</p>
+                <p className="text-xs text-slate-500">Responses within 2 business hours</p>
               </div>
             </a>
 
             {/* Address Card */}
-            <div className="bento-card rounded-2xl p-6 flex items-start gap-5 bg-[#080D1C]/80 border border-white/10">
-              <div className="w-12 h-12 rounded-xl bg-[#050A14] border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                <MapPin className="w-6 h-6 text-[#14B8A6]" />
+            <div className="rounded-2xl p-6 flex items-start gap-5 bg-white border border-slate-200/90 shadow-xs">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0 mt-0.5">
+                <MapPin className="w-5 h-5 text-emerald-600" />
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#8E9BB5]">Principal Headquarters</span>
-                <h3 className="text-sm font-bold text-white mt-0.5 font-['Outfit']">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Principal Headquarters</span>
+                <h3 className="text-sm font-bold text-[#0F172A] mt-0.5">
                   30 N Gould St Ste R<br />
                   Sheridan, WY 82801
                 </h3>
-                <p className="text-xs text-[#8E9BB5] mt-1">United States</p>
+                <p className="text-xs text-slate-500 mt-1">United States</p>
               </div>
             </div>
 
             {/* Hours Card */}
-            <div className="bento-card rounded-2xl p-6 flex items-center gap-5 bg-[#080D1C]/80 border border-white/10">
-              <div className="w-12 h-12 rounded-xl bg-[#050A14] border border-white/10 flex items-center justify-center shrink-0">
-                <Clock className="w-6 h-6 text-[#F43F5E]" />
+            <div className="rounded-2xl p-6 flex items-center gap-5 bg-white border border-slate-200/90 shadow-xs">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0">
+                <Clock className="w-5 h-5 text-[#0F172A]" />
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#8E9BB5]">Business Hours</span>
-                <h3 className="text-xs font-bold text-white font-['Outfit']">Mon &ndash; Fri: 8:00 AM &ndash; 6:00 PM EST</h3>
-                <p className="text-xs text-[#D4AF37] font-bold mt-0.5 font-mono">24/7 Automated AI Voice Line</p>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Operating Hours</span>
+                <h3 className="text-xs font-bold text-[#0F172A]">Mon &ndash; Fri: 8:00 AM &ndash; 6:00 PM EST</h3>
+                <p className="text-xs text-[#C59B6D] font-bold mt-0.5">24/7 Live AI Voice Automation Line</p>
               </div>
             </div>
 
@@ -278,34 +264,34 @@ export default function Contact() {
       </section>
 
       {/* FAQ Accordion Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200/80">
         <div className="text-center mb-12">
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-3.5 py-1.5 rounded-full border border-[#D4AF37]/30 inline-block mb-3">
-            FREQUENTLY ASKED QUESTIONS
-          </span>
-          <h2 className="text-3xl font-black text-white font-['Syne'] uppercase">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-3">
+            <span>Frequently Asked Questions</span>
+          </div>
+          <h2 className="text-3xl font-extrabold text-[#0F172A] tracking-tight">
             Common Inquiries
           </h2>
         </div>
 
-        <div className="space-y-4 font-['DM_Sans']">
+        <div className="space-y-3.5">
           {faqs.map((faq, idx) => {
             const isOpen = openFaq === idx;
             return (
               <div
                 key={idx}
-                className="bento-card rounded-2xl border border-white/10 bg-[#080D1C]/80 overflow-hidden"
+                className="rounded-2xl border border-slate-200/90 bg-white overflow-hidden shadow-xs"
               >
                 <button
                   onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between text-sm sm:text-base font-bold text-white hover:text-[#D4AF37] transition-colors font-['Outfit']"
+                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between text-base font-bold text-[#0F172A] hover:text-[#C59B6D] transition-colors"
                 >
                   <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp className="w-5 h-5 text-[#D4AF37]" /> : <ChevronDown className="w-5 h-5 text-[#8E9BB5]" />}
+                  {isOpen ? <ChevronUp className="w-5 h-5 text-slate-600" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 text-xs sm:text-sm text-[#8E9BB5] leading-relaxed border-t border-white/10 pt-4 font-['DM_Sans']">
+                  <div className="px-5 sm:px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
                     {faq.a}
                   </div>
                 )}
@@ -318,4 +304,3 @@ export default function Contact() {
     </main>
   );
 }
-

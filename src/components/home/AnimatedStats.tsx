@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
-import VideoBackground from '../ui/VideoBackground';
 
 const stats = [
-  { value: 4.8, prefix: '$', suffix: 'M+', label: 'Recovered Revenue', sub: 'Captured from missed-call leads', color: '#7C5CFC' },
-  { value: 500, suffix: '+', label: 'Projects Deployed', sub: 'Web, mobile & AI systems', color: '#D4AF37' },
-  { value: 99.8, suffix: '%', decimals: 1, label: 'AI Call Resolution', sub: 'Accurate intent & scheduling', color: '#14B8A6' },
-  { value: 15, suffix: '×', label: 'Average Client ROI', sub: 'Bottom-line revenue growth', color: '#F43F5E' },
+  { value: 4.8, prefix: '$', suffix: 'M+', label: 'Recovered Revenue', sub: 'Captured from missed-call leads', color: '#0F172A' },
+  { value: 500, suffix: '+', label: 'Projects Deployed', sub: 'Web, mobile & AI systems', color: '#C59B6D' },
+  { value: 99.8, suffix: '%', decimals: 1, label: 'AI Call Resolution', sub: 'Accurate intent & scheduling', color: '#0F172A' },
+  { value: 15, suffix: '×', label: 'Average Client ROI', sub: 'Bottom-line revenue growth', color: '#7C3AED' },
 ];
 
 function AnimatedNumber({ to, prefix = '', suffix = '', decimals = 0, color }: {
@@ -30,7 +29,7 @@ function AnimatedNumber({ to, prefix = '', suffix = '', decimals = 0, color }: {
   }, [spring, prefix, suffix, decimals]);
 
   return (
-    <span ref={ref} className="tabular-nums stat-number" style={{ color }}>
+    <span ref={ref} className="tabular-nums" style={{ color }}>
       {prefix}0{suffix}
     </span>
   );
@@ -38,74 +37,59 @@ function AnimatedNumber({ to, prefix = '', suffix = '', decimals = 0, color }: {
 
 export default function AnimatedStats() {
   return (
-    <section className="relative py-20 overflow-hidden bg-[#050A14]">
-      {/* Background video */}
-      <VideoBackground
-        src="https://videos.pexels.com/video-files/7988062/7988062-uhd_2560_1440_25fps.mp4"
-        overlayOpacity="opacity-92"
-        overlayClassName="bg-gradient-to-r from-[#050A14]/98 via-[#050A14]/88 to-[#050A14]/98"
-      />
-
-      {/* Background image layer */}
-      <div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none"
-        style={{ backgroundImage: `url('/images/ai_voice_bg.png')`, opacity: 0.04, mixBlendMode: 'screen' }}
-      />
-
-      {/* Section divider top */}
-      <div className="absolute top-0 left-0 right-0 section-divider" />
-      {/* Section divider bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent" />
-
-      {/* Glow orbs */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[250px] bg-[#7C5CFC]/10 blur-[140px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[200px] bg-[#D4AF37]/8 blur-[130px] rounded-full pointer-events-none" />
-
+    <section className="relative py-20 overflow-hidden bg-[#FAFAFC]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
+        
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <span className="eyebrow-gold">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-[#92400E] text-xs font-semibold uppercase tracking-wider">
             <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
-            Proven Results
+            Proven Impact & Scale
           </span>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+        {/* 4 Stats Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {stats.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: i * 0.1 }}
-              className="text-center space-y-2 group"
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:shadow-md transition-all duration-300 text-center flex flex-col justify-between group"
             >
-              {/* Number */}
-              <div className="text-4xl sm:text-5xl lg:text-6xl" style={{ fontFamily: "'Syne', sans-serif", fontWeight: 900 }}>
-                <AnimatedNumber
-                  to={s.value}
-                  prefix={s.prefix}
-                  suffix={s.suffix}
-                  decimals={s.decimals || 0}
-                  color={s.color}
-                />
+              <div>
+                {/* Number */}
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-['Plus_Jakarta_Sans'] font-extrabold tracking-tight mb-2">
+                  <AnimatedNumber
+                    to={s.value}
+                    prefix={s.prefix}
+                    suffix={s.suffix}
+                    decimals={s.decimals || 0}
+                    color={s.color}
+                  />
+                </div>
+
+                {/* Label */}
+                <div className="text-sm sm:text-base font-bold text-[#0F172A] font-['Plus_Jakarta_Sans'] mb-1">
+                  {s.label}
+                </div>
+                <div className="text-xs text-slate-500 font-normal leading-relaxed">
+                  {s.sub}
+                </div>
               </div>
 
-              {/* Label */}
-              <div className="text-sm font-bold text-white font-['Outfit']">{s.label}</div>
-              <div className="text-[11px] text-[#8E9BB5] font-['DM_Sans']">{s.sub}</div>
-
-              {/* Accent bar */}
+              {/* Bottom Subtle Indicator */}
               <div
-                className="h-0.5 w-10 mx-auto rounded-full mt-3 transition-all duration-500 group-hover:w-16"
-                style={{ background: `linear-gradient(90deg, transparent, ${s.color}, transparent)` }}
+                className="h-1 w-8 mx-auto rounded-full mt-4 transition-all duration-300 group-hover:w-14"
+                style={{ backgroundColor: s.color }}
               />
             </motion.div>
           ))}

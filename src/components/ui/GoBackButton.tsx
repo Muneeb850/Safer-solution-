@@ -27,10 +27,10 @@ export default function GoBackButton({
     <button
       onClick={handleGoBack}
       type="button"
-      className={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#9CA3AF] hover:text-white bg-[#12161F]/90 hover:bg-[#1C2230] border border-[#232838] hover:border-[#12B886]/50 px-4 py-2.5 rounded-xl shadow-md backdrop-blur-md transition-all duration-200 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[#12B886]/40 ${className}`}
+      className={`inline-flex items-center gap-2 text-xs font-semibold text-slate-700 hover:text-[#0F172A] bg-white hover:bg-slate-50 border border-slate-200 px-4 py-2 rounded-full shadow-xs transition-all duration-200 active:scale-95 focus:outline-none ${className}`}
       aria-label="Go back to previous page"
     >
-      <ArrowLeft className="w-4 h-4 text-[#12B886]" />
+      <ArrowLeft className="w-3.5 h-3.5 text-[#0F172A]" />
       <span>{label}</span>
     </button>
   );

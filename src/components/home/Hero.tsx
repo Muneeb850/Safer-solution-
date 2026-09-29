@@ -1,188 +1,187 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, PhoneCall, ChevronDown, Sparkles } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { motion } from 'framer-motion';
-import VideoBackground from '../ui/VideoBackground';
-
-
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 40, skewY: 3 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    skewY: 0,
-    transition: {
-      duration: 0.7,
-      delay: 0.15 + i * 0.12,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  }),
-};
+import HeroAiVoiceConsole from './HeroAiVoiceConsole';
 
 export default function Hero() {
-  return (
-    <section className="relative flex flex-col justify-center overflow-hidden bg-[#050A14] grain-overlay font-['DM_Sans'] pt-28 pb-12 sm:pt-36 sm:pb-16 min-h-[85vh] sm:min-h-screen">
+  const featureChecklist = [
+    'Instant Responses',
+    'Lead Qualification',
+    '24/7 Availability',
+    'Seamless CRM Sync',
+  ];
 
-      {/* Video background */}
-      <VideoBackground
-        src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_25fps.mp4"
-        overlayOpacity="opacity-65"
-        overlayClassName="bg-gradient-to-b from-[#050A14]/85 via-[#050A14]/30 to-[#050A14]"
+  return (
+    <section className="relative overflow-hidden bg-[#FAFAFC] pt-32 sm:pt-36 lg:pt-38 pb-20">
+      {/* Subtle Ambient Glows matching screenshot */}
+      <div
+        className="absolute top-12 right-[10%] w-[480px] h-[480px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, rgba(245, 158, 11, 0.04) 50%, transparent 75%)',
+          filter: 'blur(80px)',
+        }}
+      />
+      <div
+        className="absolute top-1/2 left-[5%] w-[320px] h-[320px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
       />
 
-      {/* Glow orbs */}
-      <div className="absolute inset-0 radial-glow-violet pointer-events-none" />
-      <div className="absolute top-1/4 right-[15%] w-[600px] h-[600px] bg-[#D4AF37]/8 blur-[200px] rounded-full pointer-events-none animate-pulse-slow" />
-      <div className="absolute bottom-1/3 left-[10%] w-[450px] h-[450px] bg-[#F43F5E]/7 blur-[180px] rounded-full pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Main 2-Column Hero Grid: Left (5 cols) | Right (7 cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center mb-20">
+          
+          {/* Left Column: Typography, Copy, Features, CTAs */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            
+            {/* Main Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl sm:text-5xl lg:text-[46px] xl:text-[54px] font-['Plus_Jakarta_Sans'] font-extrabold text-[#0F172A] tracking-[-0.035em] leading-[1.1] mb-6"
+            >
+              Automate Every<br />
+              Call. Scale 24/7.
+            </motion.h1>
 
-      {/* Sapforce Laser Beam Horizontal Line */}
-      <div className="laser-line" />
+            {/* Subheading / Descriptive Body */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-sm sm:text-base text-[#52525B] leading-[1.65] max-w-lg mb-8 font-normal"
+            >
+              Empower your business with our AI-driven voice receptionists. Handle calls instantly, qualify leads, and elevate customer experience 24/7 with the intelligence and efficiency of a high-end agency.
+            </motion.p>
 
-      {/* Ghost outline */}
-      <div
-        aria-hidden="true"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[58%] text-stroke-gold select-none pointer-events-none leading-none hidden lg:block"
-        style={{ fontSize: 'clamp(90px, 13vw, 170px)', fontFamily: "'Syne', sans-serif", fontWeight: 900, opacity: 0.5 }}
-      >
-        SAFER
-      </div>
+            {/* 4 Checkmark Features (2x2 Grid) */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3.5 mb-8 max-w-lg"
+            >
+              {featureChecklist.map((feature) => (
+                <div key={feature} className="flex items-center gap-2.5">
+                  <span className="w-5 h-5 rounded-full bg-[#F5EBE1] flex items-center justify-center text-[#A2672E] shrink-0 shadow-xs">
+                    <Check className="w-3.5 h-3.5 stroke-[2.8]" />
+                  </span>
+                  <span className="text-sm font-medium text-[#1E293B]">
+                    {feature}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
 
-      {/* ── Main Content ── */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-16 max-w-4xl mx-auto w-full text-center">
+            {/* Dual CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap items-center gap-4"
+            >
+              <Link
+                to="/contact"
+                className="rounded-full bg-[#111218] text-white px-7 py-3.5 text-sm font-medium border border-[#C59B6D] hover:bg-[#1C1E27] shadow-sm hover:shadow-md transition-all duration-200"
+              >
+                Request a Demo
+              </Link>
+              <Link
+                to="/services"
+                className="rounded-full bg-white text-[#0F172A] px-7 py-3.5 text-sm font-medium border border-[#0F172A] hover:bg-slate-50 transition-all duration-200"
+              >
+                Explore Use Cases
+              </Link>
+            </motion.div>
 
-        {/* Text content */}
-        <div className="flex flex-col items-center text-center w-full">
-
-          {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-7"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md shadow-lg shadow-[#7C5CFC]/10">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                Next-Gen Business Automation
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Headline — word-by-word reveal */}
-          <div
-            className="font-['Syne'] font-black tracking-tight uppercase leading-[0.9] overflow-hidden sapforce-neon-text"
-            style={{ fontSize: 'clamp(30px, 7.5vw, 76px)' }}
-          >
-            {['Automate', 'Every Call.', 'Scale 24/7.'].map((line, i) => (
-              <div key={i} className="overflow-hidden">
-                <motion.span
-                  custom={i}
-                  initial="hidden"
-                  animate="visible"
-                  variants={wordVariants}
-                  className={`block ${
-                    i === 1 ? 'text-gradient-gold' : 'text-white'
-                  }`}
-                >
-                  {line}
-                </motion.span>
-              </div>
-            ))}
           </div>
 
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.55 }}
-            className="mt-6 max-w-xl text-sm sm:text-[15px] text-[#8E9BB5] leading-relaxed font-['DM_Sans']"
-          >
-            AI Voice Receptionists, bespoke websites, mobile apps, and automated growth engines —
-            so <strong className="text-white font-semibold">zero leads ever slip through the cracks</strong>.
-          </motion.p>
+          {/* Right Column: Live Interactive AI Voice Receptionist Console (7 cols) */}
+          <div className="lg:col-span-7 relative flex justify-center w-full">
+            
+            {/* Ambient golden glow radiating behind top right corner */}
+            <div
+              className="absolute -top-10 -right-6 w-80 h-80 rounded-full pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle, rgba(245, 158, 11, 0.22) 0%, transparent 70%)',
+                filter: 'blur(70px)',
+              }}
+            />
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.68 }}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link
-              to="/contact"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full text-sm font-bold uppercase tracking-wider text-black overflow-hidden shadow-2xl transition-transform hover:scale-105 font-['Outfit']"
-              style={{ background: 'linear-gradient(135deg, #D4AF37, #F5D061)' }}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full flex justify-center"
             >
-              <span className="relative z-10 font-black">Book a Strategy Call</span>
-              <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
-            </Link>
+              <HeroAiVoiceConsole />
+            </motion.div>
 
-            <a
-              href="tel:713-364-5155"
-              className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full text-sm font-semibold text-white border border-white/20 hover:border-[#D4AF37]/50 bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-300 font-mono"
-            >
-              <PhoneCall className="w-4 h-4 text-[#D4AF37]" />
-              (713) 364-5155
-            </a>
-          </motion.div>
-
-          {/* Trust pills */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.82 }}
-            className="mt-8 flex flex-wrap justify-center gap-2 font-mono"
-          >
-            {['Sub-300ms Voice', 'Google Calendar Sync', 'HIPAA Compliant', '256-Bit SSL'].map((t) => (
-              <span
-                key={t}
-                className="text-[10px] text-[#8E9BB5] border border-white/10 px-3.5 py-1.5 rounded-full bg-[#080D1C]/60 backdrop-blur-sm hover:border-[#D4AF37]/40 hover:text-white transition-colors"
-              >
-                {t}
-              </span>
-            ))}
-          </motion.div>
-
-          {/* Sleek Live Metrics Bridge */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.92 }}
-            className="mt-8 pt-6 border-t border-white/10 w-full max-w-xl flex flex-wrap items-center justify-center gap-2.5 text-[11px] font-mono"
-          >
-            <div className="flex items-center gap-2 text-white/90 bg-[#080D1C]/80 px-3.5 py-1.5 rounded-full border border-white/10">
-              <span className="w-2 h-2 rounded-full bg-[#14B8A6] animate-pulse" />
-              <span className="font-bold text-[#14B8A6]">24/7</span>
-              <span className="text-[#8E9BB5]">Online</span>
-            </div>
-
-            <div className="flex items-center gap-2 text-white/90 bg-[#080D1C]/80 px-3.5 py-1.5 rounded-full border border-white/10">
-              <span className="font-bold text-[#D4AF37]">210ms</span>
-              <span className="text-[#8E9BB5]">Latency</span>
-            </div>
-
-            <div className="flex items-center gap-2 text-white/90 bg-[#080D1C]/80 px-3.5 py-1.5 rounded-full border border-white/10">
-              <span className="font-bold text-[#7C5CFC]">100%</span>
-              <span className="text-[#8E9BB5]">Capture</span>
-            </div>
-
-            <div className="flex items-center gap-2 text-white/90 bg-[#080D1C]/80 px-3.5 py-1.5 rounded-full border border-white/10">
-              <span className="font-bold text-[#F43F5E]">15x</span>
-              <span className="text-[#8E9BB5]">Avg ROI</span>
-            </div>
-          </motion.div>
+          </div>
 
         </div>
 
-      </div>
+        {/* ── Social Proof: "TRUSTED BY LEADERS" ── */}
+        <div className="pt-10 border-t border-slate-200/80">
+          <p className="text-xs font-bold tracking-[0.2em] text-[#0F172A]/70 uppercase text-center mb-8">
+            TRUSTED BY LEADERS
+          </p>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-1 text-[#8E9BB5] opacity-60">
-        <span className="text-[8px] tracking-[0.2em] uppercase font-mono font-bold">Scroll</span>
-        <ChevronDown className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-14 lg:gap-20">
+            
+            {/* 1. TechCorp */}
+            <div className="flex items-center gap-2 text-[#0F172A] hover:opacity-80 transition-opacity">
+              <div className="w-7 h-7 rounded-lg bg-[#0F172A] text-white flex items-center justify-center font-bold text-xs">
+                T
+              </div>
+              <span className="font-['Plus_Jakarta_Sans'] font-extrabold text-lg sm:text-xl tracking-tight text-[#0F172A]">
+                TechCorp
+              </span>
+            </div>
+
+            {/* 2. FinLeads */}
+            <div className="flex items-center gap-2 text-[#0F172A] hover:opacity-80 transition-opacity">
+              <div className="flex items-center text-[#0F172A]">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                  <path d="M4 18l6-6-6-6h4l6 6-6 6H4zm8 0l6-6-6-6h4l6 6-6 6h-4z" />
+                </svg>
+              </div>
+              <span className="font-['Plus_Jakarta_Sans'] font-extrabold text-lg sm:text-xl tracking-tight text-[#0F172A]">
+                FinLeads
+              </span>
+            </div>
+
+            {/* 3. ScaleUp */}
+            <div className="flex items-center gap-2 text-[#0F172A] hover:opacity-80 transition-opacity">
+              <div className="flex items-end gap-1 h-6">
+                <span className="w-1.5 h-3 bg-[#0F172A] rounded-xs" />
+                <span className="w-1.5 h-4.5 bg-[#0F172A] rounded-xs" />
+                <span className="w-1.5 h-6 bg-[#0F172A] rounded-xs" />
+              </div>
+              <span className="font-['Plus_Jakarta_Sans'] font-extrabold text-lg sm:text-xl tracking-tight text-[#0F172A]">
+                ScaleUp
+              </span>
+            </div>
+
+            {/* 4. B2B Connect */}
+            <div className="flex items-center gap-2 text-[#0F172A] hover:opacity-80 transition-opacity">
+              <div className="w-7 h-7 rounded-md border-2 border-[#0F172A] flex items-center justify-center font-bold text-xs text-[#0F172A]">
+                B2
+              </div>
+              <span className="font-['Plus_Jakarta_Sans'] font-extrabold text-lg sm:text-xl tracking-tight text-[#0F172A]">
+                B2B Connect
+              </span>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
   );
 }
-

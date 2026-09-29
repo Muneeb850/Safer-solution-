@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { Bot, Globe, Smartphone, TrendingUp, Check, ArrowRight, ShieldCheck, Zap, Layers, Clock, Cpu, Code2, Sparkles } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Bot, Globe, Smartphone, TrendingUp, Check, ArrowRight, Zap, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import GoBackButton from '../components/ui/GoBackButton';
 
 export default function Services() {
-
   const serviceSections = [
     {
       id: 'ai-receptionist',
-      title: 'AI Receptionist & Customer Support Automation',
+      title: 'AI Voice Receptionist & Call Automation',
       subtitle: '24/7 Intelligent Virtual Receptionist & Autonomous Voice Agent',
       icon: Bot,
       image: '/images/hero_ai_dashboard.png',
-      description: 'Safer Solutions AI Receptionist is an enterprise voice agent engineered to handle inbound and outbound business phone calls with natural, latency-free human conversation. It answers calls 24/7, qualifies prospective clients, books appointments directly into your calendar, and dispatches automated SMS confirmations.',
+      description: 'Safer Solution AI Receptionist is an enterprise voice agent engineered to handle inbound and outbound business phone calls with natural, latency-free human conversation. It answers calls 24/7, qualifies prospective clients, books appointments directly into your calendar, and dispatches automated SMS confirmations.',
       highlights: [
         'Sub-300ms natural conversational voice response time',
         'Direct integration with Google Calendar, Outlook & Calendly',
@@ -22,17 +21,17 @@ export default function Services() {
         'Call recording, transcript analysis & sentiment scoring',
         '24/7 availability with zero missed phone calls',
       ],
-      techSpecs: ['OpenAI / Anthropic LLM Engine', 'Twilio Voice API', 'WebSockets Real-time Audio', 'Python / Node Telemetry'],
+      techSpecs: ['OpenAI / Anthropic LLM Engine', 'Twilio Voice API', 'WebSockets Audio', 'Node.js Telemetry'],
       badge: 'FLAGSHIP SOLUTION',
-      badgeColor: '#7C5CFC', // Violet
+      badgeColor: '#C59B6D',
     },
     {
       id: 'web-development',
       title: 'High-Converting Web Development',
-      subtitle: 'Bespoke Business Websites, Portals & E-Commerce Applications',
+      subtitle: 'Bespoke Business Websites, Portals & Web Applications',
       icon: Globe,
       image: '/images/service_web_dev.png',
-      description: 'We craft high-performance web applications built from scratch using senior agency engineering practices. We combine dark mode luxury aesthetics, lightning-fast React/Next.js code, and conversion-optimized UX architecture that turns casual visitors into booked clients.',
+      description: 'We craft high-performance web applications built from scratch using senior agency engineering practices. We combine modern minimalist aesthetics, lightning-fast React/Next.js code, and conversion-optimized UX architecture that turns casual visitors into booked clients.',
       highlights: [
         'Custom React / TypeScript / Next.js architecture',
         'Pixel-perfect responsive design across all devices',
@@ -41,9 +40,9 @@ export default function Services() {
         'Integrated lead capture forms & booking widgets',
         'Enterprise SSL security & DDoS protection setup',
       ],
-      techSpecs: ['React 18 / Vite / Next.js', 'Tailwind CSS', 'Framer Motion', 'REST / GraphQL APIs'],
+      techSpecs: ['React / Vite / Next.js', 'Tailwind CSS', 'Framer Motion', 'REST / GraphQL APIs'],
       badge: 'AGENCY CRAFT',
-      badgeColor: '#D4AF37', // Gold
+      badgeColor: '#0F172A',
     },
     {
       id: 'app-development',
@@ -51,7 +50,7 @@ export default function Services() {
       subtitle: 'iOS & Android Mobile Applications Built for Speed',
       icon: Smartphone,
       image: '/images/service_app_dev.png',
-      description: 'Expand your business footprint directly into your customers\' pockets. Safer Solutions develops high-touch mobile applications for iOS and Android, featuring offline data sync, real-time push notifications, biometric login, and seamless backend integration.',
+      description: 'Expand your business footprint directly into your customers\' pockets. Safer Solution develops high-touch mobile applications for iOS and Android, featuring offline data sync, real-time push notifications, biometric login, and seamless backend integration.',
       highlights: [
         'Unified iOS and Android cross-platform codebase',
         'Seamless push notifications & user re-engagement',
@@ -60,9 +59,9 @@ export default function Services() {
         'In-app purchasing & payment gateway integrations',
         'Full App Store & Google Play Store submission management',
       ],
-      techSpecs: ['React Native / Flutter', 'TypeScript', 'Firebase / Supabase', 'Apple & Android SDKs'],
+      techSpecs: ['React Native / Flutter', 'TypeScript', 'Firebase / Supabase', 'Native SDKs'],
       badge: 'MOBILE SUITE',
-      badgeColor: '#14B8A6', // Teal
+      badgeColor: '#7C3AED',
     },
     {
       id: 'growth-systems',
@@ -76,52 +75,43 @@ export default function Services() {
         'Automated SMS & email prospect nurture campaigns',
         'Real-time conversion tracking & ROI dashboards',
         'A/B testing of landing page copy and conversion offers',
-        'Integration with Meta, Google Ads & LinkedIn marketing APIs',
+        'Integration with Meta, Google Ads & CRM APIs',
         'Dedicated growth strategy consulting and weekly reports',
       ],
-      techSpecs: ['Automated CRM Pipelines', 'Google Tag Manager & Analytics', 'Stripe Payments', 'Webhook Automations'],
+      techSpecs: ['Automated CRM Pipelines', 'Google Tag Manager', 'Stripe Payments', 'Webhook Automations'],
       badge: 'REVENUE SCALING',
-      badgeColor: '#F43F5E', // Rose
+      badgeColor: '#0F172A',
     },
   ];
 
   return (
-    <main className="pt-28 pb-24 bg-[#050A14] text-[#F8FAFC] min-h-screen bg-tech-grid font-['DM_Sans']">
+    <main className="pt-28 pb-24 bg-[#FAFAFC] text-[#0F172A] min-h-screen font-['Plus_Jakarta_Sans']">
       
       {/* Services Page Hero */}
-      <section className="relative py-20 border-b border-white/10 overflow-hidden">
-        {/* Ambient background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[#7C5CFC]/10 blur-[200px] rounded-full pointer-events-none" />
-
+      <section className="relative py-16 sm:py-20 border-b border-slate-200/80 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex justify-start mb-6">
             <GoBackButton label="Back to Home" />
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                OUR CORE SOLUTIONS
-              </span>
-            </motion.div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
+              <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
+              <span>Our Core Solutions</span>
+            </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight font-['Syne'] uppercase leading-[0.95]">
-              Specialized Tech Services Built for <span className="text-gradient-gold">Maximum Impact</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F172A] tracking-tight leading-[1.08]">
+              Specialized Tech Solutions Built for Maximum Impact
             </h1>
-            <p className="mt-6 text-[#8E9BB5] text-sm sm:text-base md:text-lg leading-relaxed font-['DM_Sans']">
-              Discover how Safer Solutions combines voice AI automation, custom software development, and online growth systems to build resilient, scaling businesses.
+            <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              Discover how Safer Solution combines voice AI automation, custom software engineering, and online growth systems to build resilient, scaling businesses.
             </p>
           </div>
         </div>
       </section>
 
       {/* Services Deep Dive List */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-16">
         {serviceSections.map((section, idx) => {
           const Icon = section.icon;
           const isEven = idx % 2 === 0;
@@ -130,67 +120,58 @@ export default function Services() {
             <section
               key={section.id}
               id={section.id}
-              className="scroll-mt-32 bento-card rounded-3xl p-8 sm:p-12 relative overflow-hidden bg-[#080D1C]/85 border border-white/10 backdrop-blur-md transition-all"
-              style={{ borderColor: `${section.badgeColor}30` }}
+              className="scroll-mt-32 rounded-[28px] p-8 sm:p-12 bg-white border border-slate-200/90 shadow-sm"
             >
               <div className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}>
                 
                 {/* Text Details (7 cols) */}
                 <div className={`lg:col-span-7 ${isEven ? '' : 'lg:order-2'}`}>
                   <div className="flex items-center gap-3 mb-4">
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md"
-                      style={{ background: `${section.badgeColor}20`, border: `1px solid ${section.badgeColor}40`, color: section.badgeColor }}
-                    >
+                    <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-[#0F172A] shrink-0">
                       <Icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <span
-                        className="text-[10px] font-mono font-bold tracking-widest uppercase px-3 py-0.5 rounded-full border"
-                        style={{
-                          color: section.badgeColor,
-                          backgroundColor: `${section.badgeColor}15`,
-                          borderColor: `${section.badgeColor}40`,
-                        }}
-                      >
+                      <span className="text-[10px] font-bold tracking-widest uppercase px-3 py-0.5 rounded-full bg-slate-100 text-[#0F172A] border border-slate-200">
                         {section.badge}
                       </span>
-                      <p className="text-xs text-[#8E9BB5] font-medium mt-1 font-['DM_Sans']">
+                      <p className="text-xs text-slate-500 font-medium mt-1">
                         {section.subtitle}
                       </p>
                     </div>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight mb-4 font-['Syne'] uppercase">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0F172A] tracking-tight mb-4">
                     {section.title}
                   </h2>
 
-                  <p className="text-[#8E9BB5] text-sm sm:text-base leading-relaxed mb-8 font-['DM_Sans']">
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-8">
                     {section.description}
                   </p>
 
                   {/* Highlights Checklist */}
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-white mb-4 flex items-center gap-2 font-['Outfit']">
-                    <Zap className="w-4 h-4 text-[#D4AF37]" />
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#0F172A] mb-4 flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-[#C59B6D]" />
                     <span>Key Capabilities & Benefits</span>
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                     {section.highlights.map((item, hIdx) => (
-                      <div key={hIdx} className="flex items-start gap-2.5 text-xs text-[#CBD5E1] bg-[#050A14] p-3.5 rounded-xl border border-white/10 font-['DM_Sans']">
-                        <Check className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                      <div key={hIdx} className="flex items-start gap-2.5 text-xs text-slate-700 bg-[#F8FAFC] p-3.5 rounded-xl border border-slate-200">
+                        <span className="w-4 h-4 rounded-full bg-[#F5EBE1] flex items-center justify-center text-[#A2672E] shrink-0 mt-0.5">
+                          <Check className="w-3 h-3 stroke-[3]" />
+                        </span>
                         <span>{item}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* Tech Specs Badges */}
-                  <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                  <div className="pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[11px] text-[#8E9BB5] font-mono mr-1">Stack:</span>
+                      <span className="text-xs text-slate-500 font-semibold mr-1">Stack:</span>
                       {section.techSpecs.map((tech, tIdx) => (
                         <span
                           key={tIdx}
-                          className="text-[11px] font-mono text-white bg-[#050A14] border border-white/10 px-2.5 py-1 rounded-lg"
+                          className="text-xs text-slate-700 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full font-medium"
                         >
                           {tech}
                         </span>
@@ -199,7 +180,7 @@ export default function Services() {
 
                     <Link
                       to="/contact"
-                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:text-white transition-colors font-['Outfit']"
+                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0F172A] hover:text-[#C59B6D] transition-colors"
                     >
                       <span>Inquire Now</span>
                       <ArrowRight className="w-4 h-4" />
@@ -209,11 +190,11 @@ export default function Services() {
 
                 {/* Visual Image Preview (5 cols) */}
                 <div className={`lg:col-span-5 ${isEven ? '' : 'lg:order-1'}`}>
-                  <div className="rounded-2xl p-1 bg-gradient-to-b from-white/15 to-white/5 shadow-2xl overflow-hidden group">
+                  <div className="rounded-2xl p-1 bg-slate-100 border border-slate-200 shadow-sm overflow-hidden group">
                     <img
                       src={section.image}
                       alt={section.title}
-                      className="w-full h-auto rounded-xl block border border-white/10 group-hover:scale-103 transition-transform duration-700"
+                      className="w-full h-auto rounded-xl block group-hover:scale-102 transition-transform duration-500"
                     />
                   </div>
                 </div>
@@ -225,17 +206,17 @@ export default function Services() {
       </div>
 
       {/* Comparison / Tiers Summary */}
-      <section className="py-20 bg-[#080D1C]/50 border-t border-white/10">
+      <section className="py-20 bg-white border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-black text-white font-['Syne'] uppercase mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-4">
             Need a Combined Enterprise Suite?
           </h2>
-          <p className="text-[#8E9BB5] text-sm max-w-xl mx-auto mb-8 font-['DM_Sans']">
-            Bundle your <strong>AI Receptionist</strong> with a <strong>Custom Website</strong> and <strong>Growth System</strong> for maximum conversion velocity.
+          <p className="text-slate-600 text-base max-w-xl mx-auto mb-8 leading-relaxed">
+            Bundle your <strong>AI Voice Receptionist</strong> with a <strong>Custom Website</strong> and <strong>Growth System</strong> for maximum conversion velocity.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-xl hover:scale-105 transition-all font-['Outfit']"
+            className="inline-flex items-center gap-3 rounded-full bg-[#111218] text-white text-sm font-semibold px-8 py-4 border border-[#C59B6D] hover:bg-[#1C1E27] shadow-md hover:scale-105 transition-all"
           >
             <span>Request a Custom Proposal</span>
             <ArrowRight className="w-4 h-4" />
@@ -246,4 +227,3 @@ export default function Services() {
     </main>
   );
 }
-

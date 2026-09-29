@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Target, Eye, Award, CheckCircle2, PhoneCall, Mail, MapPin, ArrowRight, Lock, Zap, Users, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Lock, Zap, Users, Target, CheckCircle2, Eye, ArrowRight, Sparkles } from 'lucide-react';
 import GoBackButton from '../components/ui/GoBackButton';
-import VideoBackground from '../components/ui/VideoBackground';
 
 export default function About() {
   const coreValues = [
@@ -12,68 +10,52 @@ export default function About() {
       title: 'Enterprise Trust & Security',
       description: 'We prioritize data security, SSL encryption, and strict privacy standards across all AI voice and web application integrations.',
       badge: 'Zero Compromise',
-      accent: '#7C5CFC', // Violet
+      accent: '#0F172A',
     },
     {
       icon: Zap,
-      title: 'Speed to Value',
-      description: 'We deploy fully trained AI Receptionists and custom web platforms in days—eliminating months of slow agency delay.',
-      badge: '7-14 Day Turnaround',
-      accent: '#D4AF37', // Gold
+      title: 'Rapid Deployment',
+      description: 'We deploy fully trained AI Receptionists and custom web platforms in days—eliminating months of traditional agency delay.',
+      badge: '7-Day Turnaround',
+      accent: '#C59B6D',
     },
     {
       icon: Users,
       title: 'Human-Centric AI',
-      description: 'Our AI agents emulate natural human warmth, assisting your team rather than creating robotic, frustrating client loops.',
+      description: 'Our AI voice models emulate natural conversational warmth, assisting your team rather than creating robotic phone loops.',
       badge: 'Natural Conversations',
-      accent: '#14B8A6', // Teal
+      accent: '#7C3AED',
     },
     {
       icon: Target,
       title: 'Measurable Top-Line ROI',
-      description: 'Every web line, mobile screen, and AI prompt is designed with one goal: increasing converted calls and bottom-line revenue.',
+      description: 'Every web line, mobile screen, and AI prompt is engineered to increase converted calls and verifiable revenue.',
       badge: 'Data-Verified Results',
-      accent: '#F43F5E', // Rose
+      accent: '#0F172A',
     },
   ];
 
   return (
-    <main className="pt-28 pb-24 bg-[#050A14] text-[#F1F5F9] min-h-screen bg-tech-grid font-['DM_Sans']">
+    <main className="pt-28 pb-24 bg-[#FAFAFC] text-[#0F172A] min-h-screen font-['Plus_Jakarta_Sans']">
       
       {/* Hero Header */}
-      <section className="relative py-20 border-b border-white/10 overflow-hidden">
-        {/* Cinematic Video Background */}
-        <VideoBackground
-          src="https://videos.pexels.com/video-files/2519660/2519660-uhd_2560_1440_30fps.mp4"
-          overlayOpacity="opacity-85"
-          overlayClassName="bg-gradient-to-b from-[#050A14]/90 via-[#050A14]/75 to-[#050A14]"
-        />
-        {/* Violet + Gold radial glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#7C5CFC]/12 blur-[180px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-[350px] h-[350px] bg-[#D4AF37]/10 blur-[150px] rounded-full pointer-events-none" />
-
+      <section className="relative py-16 sm:py-20 border-b border-slate-200/80 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex justify-start mb-6">
             <GoBackButton label="Back to Home" />
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-                ABOUT SAFER SOLUTIONS
-              </span>
-            </motion.div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-5">
+              <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
+              <span>About Safer Solution</span>
+            </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight font-['Syne'] uppercase leading-[0.95]">
-              Architecting the Future of <span className="text-gradient-gold">Business Automation</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F172A] tracking-tight leading-[1.08]">
+              Architecting the Future of Business Automation
             </h1>
-            <p className="mt-6 text-[#8E9BB5] text-sm sm:text-base md:text-lg leading-relaxed font-['DM_Sans']">
-              Safer Solutions is a boutique technology firm dedicated to helping businesses recapture missed revenue through 24/7 AI Receptionists, modern custom software, and digital growth engines.
+            <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              Safer Solution is an engineering-first technology firm dedicated to helping businesses recapture missed revenue through 24/7 AI Receptionists, modern custom software, and digital growth engines.
             </p>
           </div>
         </div>
@@ -84,71 +66,69 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div className="lg:col-span-6 space-y-6">
-            <span className="text-xs font-mono font-bold text-[#D4AF37] uppercase tracking-widest">
+            <span className="text-xs font-bold text-[#C59B6D] uppercase tracking-wider">
               OUR MISSION & PURPOSE
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white font-['Syne'] uppercase leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight leading-tight">
               Eliminating Missed Opportunities Through Intelligent Automation
             </h2>
 
-            <p className="text-[#8E9BB5] text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 text-base leading-relaxed">
               Every day, thousands of businesses lose high-value prospective clients simply because no one answered the phone after 5 PM, or because their web experience felt sluggish and outdated.
             </p>
 
-            <p className="text-[#8E9BB5] text-sm sm:text-base leading-relaxed">
-              Safer Solutions was founded with a clear directive: build enterprise technology systems—combining 24/7 AI virtual receptionists, bespoke web & mobile applications, and automated growth funnels—that ensure zero leads ever slip through the cracks.
+            <p className="text-slate-600 text-base leading-relaxed">
+              Safer Solution was founded with a clear directive: build enterprise technology systems—combining 24/7 AI virtual receptionists, bespoke web & mobile applications, and automated growth funnels—that ensure zero leads ever slip through the cracks.
             </p>
 
-            <div className="pt-4 grid grid-cols-2 gap-4 text-xs font-bold text-white font-['Outfit']">
-              <div className="flex items-center gap-2 bg-[#080D1C] p-4 rounded-xl border border-white/10">
-                <CheckCircle2 className="w-4 h-4 text-[#7C5CFC]" />
+            <div className="pt-4 grid grid-cols-2 gap-4 text-xs font-bold text-[#0F172A]">
+              <div className="flex items-center gap-2 bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                 <span>US-Based Engineering</span>
               </div>
-              <div className="flex items-center gap-2 bg-[#080D1C] p-4 rounded-xl border border-white/10">
-                <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" />
+              <div className="flex items-center gap-2 bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                <CheckCircle2 className="w-4 h-4 text-[#C59B6D]" />
                 <span>24/7 Telemetry & Monitoring</span>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-6">
-            <div className="bento-card rounded-3xl p-8 bg-[#080D1C]/90 border border-[#D4AF37]/30 relative overflow-hidden backdrop-blur-md">
-              {/* Mission Image Thumbnail Header */}
-              <div className="relative h-48 w-full rounded-2xl overflow-hidden mb-6">
+            <div className="rounded-[28px] p-8 bg-white border border-slate-200/90 shadow-sm relative overflow-hidden">
+              <div className="relative h-48 w-full rounded-2xl overflow-hidden mb-6 bg-slate-100">
                 <img 
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80" 
-                  alt="Safer Solutions Team" 
+                  alt="Safer Solution Team" 
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080D1C] via-transparent to-transparent" />
               </div>
 
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-[#7C5CFC]/20 border border-[#7C5CFC]/40 flex items-center justify-center">
-                  <Eye className="w-5 h-5 text-[#7C5CFC]" />
+                <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-[#C59B6D]">
+                  <Eye className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white font-['Outfit']">Our Vision</h3>
-                  <p className="text-xs text-[#8E9BB5]">A World Without Lost Client Calls</p>
+                  <h3 className="text-xl font-bold text-[#0F172A]">Our Vision</h3>
+                  <p className="text-xs text-slate-500">A World Without Lost Client Calls</p>
                 </div>
               </div>
 
-              <blockquote className="text-xs sm:text-sm text-[#CBD5E1] italic leading-relaxed mb-6 border-l-2 border-[#D4AF37] pl-4 font-['DM_Sans']">
+              <blockquote className="text-sm text-slate-600 italic leading-relaxed mb-6 border-l-2 border-[#C59B6D] pl-4">
                 "We envision a business ecosystem where technology handles repetitive receptionist work, appointment scheduling, and software friction effortlessly—allowing human teams to focus exclusively on high-touch strategy and client service."
               </blockquote>
 
-              <div className="pt-6 border-t border-white/10 space-y-3 text-xs text-[#8E9BB5] font-mono">
+              <div className="pt-6 border-t border-slate-100 space-y-2.5 text-xs text-slate-500">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                   <span>Operating Address:</span>
-                  <span className="text-white font-medium">Sheridan, Wyoming</span>
+                  <span className="text-[#0F172A] font-medium">Sheridan, Wyoming</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                   <span>Direct Phone Support:</span>
-                  <a href="tel:713-364-5155" className="text-[#D4AF37] font-bold">(713) 364-5155</a>
+                  <a href="tel:713-364-5155" className="text-[#C59B6D] font-bold">(713) 364-5155</a>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                   <span>Contact Email:</span>
-                  <a href="mailto:safersolutionllc@gmail.com" className="text-white font-medium break-all">safersolutionllc@gmail.com</a>
+                  <a href="mailto:safersolutionllc@gmail.com" className="text-[#0F172A] font-medium">safersolutionllc@gmail.com</a>
                 </div>
               </div>
             </div>
@@ -158,15 +138,15 @@ export default function About() {
       </section>
 
       {/* Core Values Section */}
-      <section className="py-20 bg-[#080D1C]/50 border-t border-white/10">
+      <section className="py-20 bg-white border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#7C5CFC] bg-[#7C5CFC]/10 px-3.5 py-1.5 rounded-full border border-[#7C5CFC]/30 inline-block mb-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 bg-slate-100 px-3.5 py-1.5 rounded-full border border-slate-200 inline-block mb-3">
               WHAT DRIVES US
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white font-['Syne'] uppercase">
-              Our Foundational <span className="text-gradient-gold">Principles</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
+              Our Foundational Principles
             </h2>
           </div>
 
@@ -176,29 +156,22 @@ export default function About() {
               return (
                 <div
                   key={idx}
-                  className="bento-card rounded-2xl p-6 bg-[#080D1C]/80 border border-white/10 hover:border-[#D4AF37]/40 transition-all flex flex-col justify-between"
-                  style={{ borderColor: `${val.accent}25` }}
+                  className="rounded-2xl p-6 bg-[#FAFAFC] border border-slate-200/90 shadow-xs flex flex-col justify-between"
                 >
                   <div>
-                    <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-md"
-                      style={{ background: `${val.accent}20`, border: `1px solid ${val.accent}40`, color: val.accent }}
-                    >
-                      <Icon className="w-6 h-6" />
+                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center mb-6 shadow-xs text-[#0F172A]">
+                      <Icon className="w-5 h-5" />
                     </div>
 
-                    <span 
-                      className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded inline-block mb-3"
-                      style={{ background: `${val.accent}15`, border: `1px solid ${val.accent}30`, color: val.accent }}
-                    >
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 inline-block mb-3">
                       {val.badge}
                     </span>
 
-                    <h3 className="text-lg font-bold text-white mb-2 font-['Outfit']">
+                    <h3 className="text-lg font-bold text-[#0F172A] mb-2">
                       {val.title}
                     </h3>
 
-                    <p className="text-xs text-[#8E9BB5] leading-relaxed font-['DM_Sans']">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                       {val.description}
                     </p>
                   </div>
@@ -213,15 +186,15 @@ export default function About() {
       {/* CTA Footer Teaser */}
       <section className="py-20 text-center">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl sm:text-4xl font-black text-white font-['Syne'] uppercase mb-4">
-            Partner With Safer Solutions
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mb-4">
+            Partner With Safer Solution
           </h2>
-          <p className="text-[#8E9BB5] text-sm mb-8 font-['DM_Sans'] max-w-xl mx-auto">
-            Let us design, build, and deploy your custom AI Receptionist and web ecosystem.
+          <p className="text-slate-600 text-base mb-8 max-w-xl mx-auto">
+            Let us design, build, and deploy your custom AI Voice Receptionist and web ecosystem.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-bold text-xs uppercase tracking-wider py-4 px-8 rounded-full shadow-xl hover:scale-105 transition-all font-['Outfit']"
+            className="inline-flex items-center gap-3 rounded-full bg-[#111218] text-white font-semibold text-sm px-8 py-4 border border-[#C59B6D] hover:bg-[#1C1E27] shadow-md hover:scale-105 transition-all"
           >
             <span>Book a Strategy Call</span>
             <ArrowRight className="w-4 h-4" />
@@ -232,4 +205,3 @@ export default function About() {
     </main>
   );
 }
-

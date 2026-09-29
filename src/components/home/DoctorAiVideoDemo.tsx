@@ -231,49 +231,32 @@ export default function DoctorAiVideoDemo() {
   };
 
   return (
-    <section className="py-28 bg-[#050A14] relative overflow-hidden border-y border-white/10 bg-tech-grid font-['DM_Sans']">
-      {/* Cinematic Video Background */}
-      <VideoBackground
-        src="https://videos.pexels.com/video-files/2278095/2278095-uhd_2560_1440_30fps.mp4"
-        overlayOpacity="opacity-88"
-        overlayClassName="bg-gradient-to-b from-[#050A14] via-[#050A14]/90 to-[#050A14]"
-      />
-
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#7C5CFC]/12 blur-[200px] pointer-events-none rounded-full" />
-
+    <section className="py-28 bg-[#FAFAFC] relative overflow-hidden border-t border-slate-200/80 font-['Plus_Jakarta_Sans']">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-4"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
-              Interactive AI Voice Console
-            </span>
-          </motion.div>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-[#C59B6D]" />
+            <span>Interactive Voice Demonstration</span>
+          </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight font-['Syne'] uppercase leading-[0.95]">
-            See How Our Voice Agent Books <span className="text-gradient-gold">Doctor Appointments</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] tracking-tight font-['Plus_Jakarta_Sans'] leading-tight">
+            See How Our Voice Agent Books Real Appointments
           </h2>
-          <p className="mt-4 text-[#8E9BB5] text-sm sm:text-base leading-relaxed font-['DM_Sans']">
-            Watch our 24/7 Virtual Receptionist handle patient inquiries, check live doctor availability, and book appointments directly into clinic calendars.
+          <p className="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+            Listen as our 24/7 Virtual Receptionist handles caller questions, checks live clinic availability, and books appointments autonomously.
           </p>
 
-          {/* Preset Specialty Tabs - Single Responsive Row */}
-          <div className="mt-8 max-w-2xl mx-auto w-full px-1">
-            <div className="grid grid-cols-3 gap-1.5 sm:gap-3 p-1.5 bg-[#080D1C] border border-white/10 rounded-2xl sm:rounded-full font-['Outfit'] shadow-xl">
+          {/* Preset Specialty Tabs */}
+          <div className="mt-8 max-w-lg mx-auto w-full px-1">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2 p-1.5 bg-slate-100 border border-slate-200 rounded-full shadow-inner">
               <button
                 onClick={() => handleSelectSpecialty('general')}
-                className={`py-2.5 px-1.5 sm:px-4 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1 sm:gap-2 text-center ${
+                className={`py-2 px-2 sm:px-4 rounded-full text-xs font-semibold transition-all flex items-center justify-center gap-1.5 text-center ${
                   selectedSpecialty === 'general'
-                    ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-lg scale-[1.02]'
-                    : 'text-[#8E9BB5] hover:text-white hover:bg-white/5'
+                    ? 'bg-[#111218] text-white shadow-sm'
+                    : 'text-slate-600 hover:text-[#0F172A]'
                 }`}
               >
                 <Stethoscope className="w-3.5 h-3.5 shrink-0" />
@@ -282,10 +265,10 @@ export default function DoctorAiVideoDemo() {
 
               <button
                 onClick={() => handleSelectSpecialty('dental')}
-                className={`py-2.5 px-1.5 sm:px-4 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1 sm:gap-2 text-center ${
+                className={`py-2 px-2 sm:px-4 rounded-full text-xs font-semibold transition-all flex items-center justify-center gap-1.5 text-center ${
                   selectedSpecialty === 'dental'
-                    ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-lg scale-[1.02]'
-                    : 'text-[#8E9BB5] hover:text-white hover:bg-white/5'
+                    ? 'bg-[#111218] text-white shadow-sm'
+                    : 'text-slate-600 hover:text-[#0F172A]'
                 }`}
               >
                 <UserCheck className="w-3.5 h-3.5 shrink-0" />
@@ -294,10 +277,10 @@ export default function DoctorAiVideoDemo() {
 
               <button
                 onClick={() => handleSelectSpecialty('dermatology')}
-                className={`py-2.5 px-1.5 sm:px-4 rounded-xl sm:rounded-full text-[10px] sm:text-xs font-bold transition-all flex items-center justify-center gap-1 sm:gap-2 text-center ${
+                className={`py-2 px-2 sm:px-4 rounded-full text-xs font-semibold transition-all flex items-center justify-center gap-1.5 text-center ${
                   selectedSpecialty === 'dermatology'
-                    ? 'bg-gradient-to-r from-[#D4AF37] to-[#F5D061] text-black font-black shadow-lg scale-[1.02]'
-                    : 'text-[#8E9BB5] hover:text-white hover:bg-white/5'
+                    ? 'bg-[#111218] text-white shadow-sm'
+                    : 'text-slate-600 hover:text-[#0F172A]'
                 }`}
               >
                 <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
@@ -308,7 +291,7 @@ export default function DoctorAiVideoDemo() {
         </div>
 
         {/* Video & Demo Card Container */}
-        <div className="bento-card rounded-3xl p-4 sm:p-6 lg:p-10 bg-[#080D1C]/90 border border-white/10 shadow-2xl backdrop-blur-md relative overflow-hidden">
+        <div className="rounded-[28px] p-4 sm:p-6 lg:p-10 bg-[#12131A] text-white border border-white/10 shadow-2xl relative overflow-hidden">
           
           {/* Top Bar */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-white/10">

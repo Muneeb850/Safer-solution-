@@ -56,7 +56,7 @@ export default function App() {
       <ScrollToTop />
       <ScrollProgressBar />
       <FloatingContact />
-      <div className="flex flex-col min-h-screen bg-[#040816] text-[#F1F5F9] relative z-10">
+      <div className="flex flex-col min-h-screen bg-[#FAFAFC] text-[#0F172A] relative z-10 font-sans selection:bg-[#0F172A] selection:text-white">
         <Navbar />
         <div className="flex-grow">
           <AnimatedRoutes />
