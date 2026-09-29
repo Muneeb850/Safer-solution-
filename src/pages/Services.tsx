@@ -11,7 +11,7 @@ export default function Services() {
       title: 'AI Voice Receptionist & Call Automation',
       subtitle: '24/7 Intelligent Virtual Receptionist & Autonomous Voice Agent',
       icon: Bot,
-      image: '/images/hero_ai_dashboard.png',
+      image: '/images/hero_ai_dashboard.webp',
       description: 'Safer Solution AI Receptionist is an enterprise voice agent engineered to handle inbound and outbound business phone calls with natural, latency-free human conversation. It answers calls 24/7, qualifies prospective clients, books appointments directly into your calendar, and dispatches automated SMS confirmations.',
       highlights: [
         'Sub-300ms natural conversational voice response time',
@@ -30,7 +30,7 @@ export default function Services() {
       title: 'High-Converting Web Development',
       subtitle: 'Bespoke Business Websites, Portals & Web Applications',
       icon: Globe,
-      image: '/images/service_web_dev.png',
+      image: '/images/service_web_dev.webp',
       description: 'We craft high-performance web applications built from scratch using senior agency engineering practices. We combine modern minimalist aesthetics, lightning-fast React/Next.js code, and conversion-optimized UX architecture that turns casual visitors into booked clients.',
       highlights: [
         'Custom React / TypeScript / Next.js architecture',
@@ -49,7 +49,7 @@ export default function Services() {
       title: 'Native & Cross-Platform App Development',
       subtitle: 'iOS & Android Mobile Applications Built for Speed',
       icon: Smartphone,
-      image: '/images/service_app_dev.png',
+      image: '/images/service_app_dev.webp',
       description: 'Expand your business footprint directly into your customers\' pockets. Safer Solution develops high-touch mobile applications for iOS and Android, featuring offline data sync, real-time push notifications, biometric login, and seamless backend integration.',
       highlights: [
         'Unified iOS and Android cross-platform codebase',
@@ -68,7 +68,7 @@ export default function Services() {
       title: 'Online Business Growth Systems',
       subtitle: 'Automated Lead Generation, Marketing Funnels & Scaling Systems',
       icon: TrendingUp,
-      image: '/images/growth_systems.png',
+      image: '/images/growth_systems.webp',
       description: 'Building software is only half the battle. Our Online Business Growth Systems create predictable lead pipelines through automated marketing funnels, email/SMS nurture sequences, conversion rate optimization, and real-time revenue telemetry dashboards.',
       highlights: [
         'Multi-channel automated lead capture funnels',
@@ -193,6 +193,10 @@ export default function Services() {
                     <img
                       src={section.image}
                       alt={section.title}
+                      loading="lazy"
+                      decoding="async"
+                      width={600}
+                      height={450}
                       className="w-full h-auto rounded-xl block group-hover:scale-102 transition-transform duration-500"
                     />
                   </div>

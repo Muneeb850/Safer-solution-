@@ -15,7 +15,7 @@ export default function Portfolio() {
       category: 'AI Voice Receptionist',
       title: 'Apex Legal Group — 24/7 AI Intake Agent',
       client: 'Legal & Enterprise Consulting',
-      image: '/images/hero_ai_dashboard.png',
+      image: '/images/hero_ai_dashboard.webp',
       description: 'Deployed an autonomous voice AI receptionist to answer after-hours calls, perform preliminary client intake, and schedule consultation calls directly onto partner calendars.',
       metrics: [
         { label: 'After-Hours Bookings', val: '+380%' },
@@ -31,7 +31,7 @@ export default function Portfolio() {
       category: 'Web Development',
       title: 'Horizon Health — Enterprise Telehealth Portal',
       client: 'Healthcare & Wellness',
-      image: '/images/service_web_dev.png',
+      image: '/images/service_web_dev.webp',
       description: 'Engineered a modern React/Next.js patient portal with HIPAA-conscious design, instant online appointment booking, and sub-second page load times.',
       metrics: [
         { label: 'Site Speed Score', val: '99/100' },
@@ -47,7 +47,7 @@ export default function Portfolio() {
       category: 'App Development',
       title: 'FleetSync Mobile — Logistics & Driver Telematics App',
       client: 'Transport & Logistics',
-      image: '/images/service_app_dev.png',
+      image: '/images/service_app_dev.webp',
       description: 'Built cross-platform iOS and Android mobile software enabling real-time driver dispatching, biometric check-ins, and offline GPS logging.',
       metrics: [
         { label: 'Active Drivers', val: '50,000+' },
@@ -63,7 +63,7 @@ export default function Portfolio() {
       category: 'Growth Systems',
       title: 'Quantum SaaS — Automated Lead Acquisition Engine',
       client: 'B2B Software Enterprise',
-      image: '/images/growth_systems.png',
+      image: '/images/growth_systems.webp',
       description: 'Constructed an end-to-end digital growth pipeline linking targeted ad funnels to automated SMS nurture sequences and live sales dashboards.',
       metrics: [
         { label: 'Qualified Demo Requests', val: '+340%' },
@@ -142,6 +142,10 @@ export default function Portfolio() {
                     <img
                       src={item.image}
                       alt={item.title}
+                      loading="lazy"
+                      decoding="async"
+                      width={600}
+                      height={350}
                       className="w-full h-56 object-cover object-top group-hover:scale-102 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3 bg-[#111218] text-white px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider">
@@ -228,6 +232,10 @@ export default function Portfolio() {
                 <img
                   src={selectedCase.image}
                   alt={selectedCase.title}
+                  loading="lazy"
+                  decoding="async"
+                  width={800}
+                  height={450}
                   className="w-full h-64 object-cover object-top"
                 />
               </div>

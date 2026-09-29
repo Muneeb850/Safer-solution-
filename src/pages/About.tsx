@@ -96,8 +96,12 @@ export default function About() {
             <div className="rounded-[28px] p-8 bg-white border border-slate-200/90 shadow-sm relative overflow-hidden">
               <div className="relative h-48 w-full rounded-2xl overflow-hidden mb-6 bg-slate-100">
                 <img 
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format&fit=crop&q=80" 
+                  src="/images/about_team.webp" 
                   alt="Safer Solution Team" 
+                  loading="lazy"
+                  decoding="async"
+                  width={800}
+                  height={400}
                   className="w-full h-full object-cover"
                 />
               </div>

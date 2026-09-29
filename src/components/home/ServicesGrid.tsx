@@ -16,7 +16,7 @@ export const servicesData = [
       'Instant Google/Outlook Calendar Booking',
       'Automatic CRM & SMS Lead Dispatch',
     ],
-    image: '/images/hero_ai_dashboard.png',
+    image: '/images/hero_ai_dashboard.webp',
     accentColor: '#06B6D4',
   },
   {
@@ -31,7 +31,7 @@ export const servicesData = [
       'Enterprise Web Security & SSL',
       'SEO & Speed Score Optimization (98+)',
     ],
-    image: '/images/service_web_dev.png',
+    image: '/images/service_web_dev.webp',
     accentColor: '#10B981',
   },
   {
@@ -46,7 +46,7 @@ export const servicesData = [
       'Biometric Security & Offline Sync',
       'App Store & Play Store Publishing',
     ],
-    image: '/images/service_app_dev.png',
+    image: '/images/service_app_dev.webp',
     accentColor: '#8B5CF6',
   },
   {
@@ -61,7 +61,7 @@ export const servicesData = [
       'Multi-Channel Digital Marketing',
       'Real-Time Revenue Analytics',
     ],
-    image: '/images/growth_systems.png',
+    image: '/images/growth_systems.webp',
     accentColor: '#F59E0B',
   },
 ];
@@ -72,7 +72,7 @@ export default function ServicesGrid() {
       {/* Background Image & Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-screen pointer-events-none"
-        style={{ backgroundImage: `url('/images/services_bg_pattern.png')` }}
+        style={{ backgroundImage: `url('/images/services_bg_pattern.webp')` }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-[#030712]/85 to-[#030712] pointer-events-none" />
 

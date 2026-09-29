@@ -151,6 +151,10 @@ export default function Testimonials() {
                         <img 
                           src={t.avatar} 
                           alt={t.name}
+                          loading="lazy"
+                          decoding="async"
+                          width={44}
+                          height={44}
                           className="w-11 h-11 rounded-full object-cover shadow-md"
                           style={{ border: `2px solid ${t.color}60` }}
                         />

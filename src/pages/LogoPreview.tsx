@@ -6,7 +6,7 @@ const options = [
   {
     id: 1,
     title: 'Option 1: Geometric Cyber "S" Shield Monogram',
-    image: '/images/logo_concept_1.png',
+    image: '/images/logo_concept_1.webp',
     style: 'Futuristic 3D geometric shield intertwined with the letter "S".',
     bestFor: 'Strong brand recognition, high-tech AI & enterprise security vibe.',
     badgeColor: '#7C5CFC',
@@ -14,7 +14,7 @@ const options = [
   {
     id: 2,
     title: 'Option 2: Minimalist AI Node Crest & Ring Emblem',
-    image: '/images/logo_concept_2.png',
+    image: '/images/logo_concept_2.webp',
     style: 'Sleek circular metallic gold ring with a glowing electric violet AI core.',
     bestFor: 'Modern SaaS aesthetics, clean icon representation across mobile & web.',
     badgeColor: '#D4AF37',
@@ -22,7 +22,7 @@ const options = [
   {
     id: 3,
     title: 'Option 3: Hexagonal Cyber Shield & Infinity Node Mark',
-    image: '/images/logo_concept_3.png',
+    image: '/images/logo_concept_3.webp',
     style: 'Sharp hexagonal shield with neon violet laser border and gold lock/infinity node center.',
     bestFor: 'Luxury corporate feel, bold tech agency presence.',
     badgeColor: '#14B8A6',
@@ -62,6 +62,10 @@ export default function LogoPreview() {
                   <img
                     src={opt.image}
                     alt={opt.title}
+                    loading="lazy"
+                    decoding="async"
+                    width={400}
+                    height={400}
                     className="w-full h-64 object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                   />
                   <div
