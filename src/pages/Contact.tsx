@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, ChevronDown, ChevronUp, Sparkles, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, Sparkles, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import GoBackButton from '../components/ui/GoBackButton';
 
@@ -14,26 +14,6 @@ export default function Contact() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  const faqs = [
-    {
-      q: 'How fast can Safer Solution AI Receptionists be deployed?',
-      a: 'Initial AI receptionist onboarding and custom prompt setup takes 3 to 5 business days. Full testing, phone number porting/forwarding, and CRM integration are completed within 7 business days.',
-    },
-    {
-      q: 'Can the AI Receptionist sync with our existing calendar and CRM software?',
-      a: 'Yes! Our system seamlessly integrates with Google Calendar, Outlook, Calendly, HubSpot, Salesforce, HighLevel, and custom Webhook APIs.',
-    },
-    {
-      q: 'What is the typical turnaround time for custom Web or App Development?',
-      a: 'Custom web application projects typically launch in 2 to 4 weeks depending on scope. Native mobile app development generally spans 4 to 8 weeks with complete app store submission.',
-    },
-    {
-      q: 'Do you offer ongoing technical maintenance and support after launch?',
-      a: 'Absolutely. We provide 24/7 telemetry monitoring for AI agents, server maintenance, SSL certificate renewals, and dedicated engineering support.',
-    },
-  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +27,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="pt-28 pb-24 bg-[#FAFAFC] text-[#0F172A] min-h-screen font-['Plus_Jakarta_Sans']">
+    <main className="pt-10 sm:pt-14 pb-24 bg-[#FAFAFC] text-[#0F172A] min-h-screen font-['Plus_Jakarta_Sans']">
       
       {/* Hero Header */}
       <section className="relative py-16 sm:py-20 border-b border-slate-200/80 overflow-hidden">
@@ -260,44 +240,6 @@ export default function Contact() {
 
           </div>
 
-        </div>
-      </section>
-
-      {/* FAQ Accordion Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200/80">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 text-xs font-semibold uppercase tracking-wider mb-3">
-            <span>Frequently Asked Questions</span>
-          </div>
-          <h2 className="text-3xl font-extrabold text-[#0F172A] tracking-tight">
-            Common Inquiries
-          </h2>
-        </div>
-
-        <div className="space-y-3.5">
-          {faqs.map((faq, idx) => {
-            const isOpen = openFaq === idx;
-            return (
-              <div
-                key={idx}
-                className="rounded-2xl border border-slate-200/90 bg-white overflow-hidden shadow-xs"
-              >
-                <button
-                  onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between text-base font-bold text-[#0F172A] hover:text-[#C59B6D] transition-colors"
-                >
-                  <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp className="w-5 h-5 text-slate-600" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
-                </button>
-
-                {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
         </div>
       </section>
 

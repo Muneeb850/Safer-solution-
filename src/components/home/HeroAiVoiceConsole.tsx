@@ -194,7 +194,7 @@ export default function HeroAiVoiceConsole() {
   const IconComponent = activeScenario.icon;
 
   return (
-    <div className="w-full max-w-[720px] rounded-[28px] bg-[#0E1017] border border-white/10 p-4 sm:p-5 shadow-[0_24px_50px_rgba(0,0,0,0.35)] text-white relative z-10 flex flex-col gap-4 font-['Plus_Jakarta_Sans']">
+    <div className="w-full max-w-[720px] rounded-[24px] bg-[#0E1017] border border-white/10 p-3.5 sm:p-4 shadow-[0_20px_45px_rgba(0,0,0,0.35)] text-white relative z-10 flex flex-col gap-3 font-['Plus_Jakarta_Sans']">
       
       {/* ── Top Header Bar with Industry & Voice Selectors ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3.5 border-b border-white/10 gap-3">
@@ -317,7 +317,7 @@ export default function HeroAiVoiceConsole() {
             </div>
 
             {/* Dialogue Quote Bubble */}
-            <div className="bg-[#0E1017] border border-white/5 rounded-xl p-3.5 min-h-[95px] flex items-center">
+            <div className="bg-[#0E1017] border border-white/5 rounded-xl p-3 min-h-[72px] flex items-center">
               <p className="text-xs sm:text-[13px] text-slate-200 italic leading-relaxed">
                 "{getFormattedText(currentLine.text)}"
               </p>
@@ -325,7 +325,7 @@ export default function HeroAiVoiceConsole() {
           </div>
 
           {/* Bottom Controls Bar */}
-          <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between gap-2">
+          <div className="pt-3 mt-3 border-t border-white/5 flex items-center justify-between gap-2">
             {/* Play/Pause Button */}
             <button
               onClick={handleTogglePlay}
@@ -375,8 +375,8 @@ export default function HeroAiVoiceConsole() {
 
         </div>
 
-        {/* Right Column: Real-Time Calendar Telemetry */}
-        <div className="bg-[#151722] rounded-2xl p-4 border border-white/5 flex flex-col justify-between shadow-inner">
+        {/* Right Column: Real-Time Calendar Telemetry (Hidden on mobile) */}
+        <div className="hidden md:flex flex-col justify-between bg-[#151722] rounded-2xl p-4 border border-white/5 shadow-inner">
           
           <div>
             {/* Top Badges */}

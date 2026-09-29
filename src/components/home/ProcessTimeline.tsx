@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, PenTool, Cpu, TrendingUp, Sparkles, ArrowRight } from 'lucide-react';
+import { Search, PenTool, Cpu, TrendingUp, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const steps = [
@@ -89,12 +89,9 @@ export default function ProcessTimeline() {
                   </p>
                 </div>
 
-                <div className="pt-4 mt-6 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-500 font-medium">
-                  <div className="flex items-center gap-1.5">
-                    <Icon className="w-3.5 h-3.5 text-[#0F172A]" />
-                    <span>Phase {idx + 1}</span>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-1 transition-transform" />
+                <div className="pt-3.5 mt-5 border-t border-slate-200/60 flex items-center gap-2 text-xs text-slate-500 font-medium">
+                  <Icon className="w-3.5 h-3.5 text-[#0F172A]" />
+                  <span>Phase {idx + 1} Milestone</span>
                 </div>
               </motion.div>
             );

@@ -13,7 +13,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#FAFAFC] pt-32 sm:pt-36 lg:pt-38 pb-20">
+    <section className="relative overflow-hidden bg-[#FAFAFC] pt-10 sm:pt-14 lg:pt-16 pb-20">
       {/* Subtle Ambient Glows matching screenshot */}
       <div
         className="absolute top-12 right-[10%] w-[480px] h-[480px] rounded-full pointer-events-none"

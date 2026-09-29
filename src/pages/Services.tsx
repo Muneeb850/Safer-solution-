@@ -85,7 +85,7 @@ export default function Services() {
   ];
 
   return (
-    <main className="pt-28 pb-24 bg-[#FAFAFC] text-[#0F172A] min-h-screen font-['Plus_Jakarta_Sans']">
+    <main className="pt-10 sm:pt-14 pb-24 bg-[#FAFAFC] text-[#0F172A] min-h-screen font-['Plus_Jakarta_Sans']">
       
       {/* Services Page Hero */}
       <section className="relative py-16 sm:py-20 border-b border-slate-200/80 overflow-hidden">

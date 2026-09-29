@@ -28,20 +28,26 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
+    <header
+      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-auto ${
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200/90 shadow-[0_4px_24px_rgba(15,23,42,0.06)] py-3'
+          : 'bg-[#FAFAFC]/85 backdrop-blur-md border-b border-slate-200/50 py-3.5 sm:py-4'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo on the Left (pointer-events-auto) */}
+          {/* Logo on the Left */}
           <Link
             to="/"
-            className="pointer-events-auto flex items-center group transition-transform duration-200 hover:scale-[1.02]"
+            className="flex items-center group transition-transform duration-200 hover:scale-[1.02]"
           >
             <BrandLogo variant="dark" size="md" />
           </Link>
 
           {/* Centered Floating Capsule Navbar */}
-          <nav className="pointer-events-auto hidden md:flex items-center gap-5 lg:gap-7 bg-[#13141B] border border-white/10 rounded-full pl-6 pr-2 py-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+          <nav className="hidden md:flex items-center gap-5 lg:gap-7 bg-[#13141B] border border-white/10 rounded-full pl-6 pr-2 py-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.18)]">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
@@ -62,17 +68,17 @@ export default function Navbar() {
             {/* "Book Demo" button inside the floating dark capsule */}
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center px-4 py-1.5 rounded-full text-[13px] font-['Plus_Jakarta_Sans'] font-medium text-white bg-[#20222F] hover:bg-[#2A2D3E] border border-white/15 transition-all duration-200 shadow-sm ml-1"
+              className="inline-flex items-center justify-center px-4 py-1.5 rounded-full text-[13px] font-['Plus_Jakarta_Sans'] font-semibold text-black bg-gradient-to-r from-[#D4AF37] to-[#F5D061] hover:brightness-105 transition-all duration-200 shadow-sm ml-1"
             >
               Book Demo
             </Link>
           </nav>
 
-          {/* Direct Phone / Contact Badge on Right for desktop completeness */}
-          <div className="pointer-events-auto hidden lg:flex items-center gap-3">
+          {/* Direct Phone / Contact Badge on Right */}
+          <div className="hidden lg:flex items-center gap-3">
             <a
               href="tel:713-364-5155"
-              className="text-xs font-semibold text-slate-700 hover:text-[#0F172A] transition-colors py-2 px-3 rounded-full hover:bg-slate-100 flex items-center gap-1.5"
+              className="text-xs font-semibold text-slate-700 hover:text-[#0F172A] transition-colors py-2 px-3.5 rounded-full bg-slate-100 hover:bg-slate-200/80 border border-slate-200 flex items-center gap-1.5 shadow-2xs"
             >
               <PhoneCall className="w-3.5 h-3.5 text-[#C59B6D]" />
               <span>(713) 364-5155</span>
