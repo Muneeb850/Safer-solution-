@@ -87,7 +87,8 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       console.error('Resend error:', data);
-      return res.status(502).json({ error: 'Failed to send message. Please try again or call us directly.' });
+      const detail = data?.message || 'Failed to send message. Please try again or call us directly.';
+      return res.status(502).json({ error: detail });
     }
 
     return res.status(200).json({ success: true, id: data.id });
