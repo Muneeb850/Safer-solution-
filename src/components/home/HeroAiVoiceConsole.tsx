@@ -9,6 +9,8 @@ export default function HeroAiVoiceConsole() {
   const [currentStep, setCurrentStep] = useState(2); // Start at step 2 (Timestamp 0:08)
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [usingAudioTrack, setUsingAudioTrack] = useState(false);
 
   const voiceProfiles = {
     sophia: { name: 'Sophia', pitch: 1.08, rate: 0.92, keywords: ['UK', 'Susan', 'Serena', 'Google UK English', 'Female'] },
@@ -22,6 +24,7 @@ export default function HeroAiVoiceConsole() {
     dentist: {
       businessName: 'Apex Dental Care & Orthodontics',
       subTitle: 'Dr. James Thorne, D.D.S. • 24/7 Dental Receptionist',
+      audioUrl: '/audio/dentist_demo.mp3',
       icon: Smile,
       badgeColor: '#C59B6D',
       telemetryTitle: 'Attending Dentist',
@@ -53,6 +56,7 @@ export default function HeroAiVoiceConsole() {
     hvac: {
       businessName: 'Apex Heating & Air Conditioning',
       subTitle: 'Marcus Cole (Senior Tech) • 24/7 Emergency Dispatcher',
+      audioUrl: '/audio/hvac_demo.mp3',
       icon: Wind,
       badgeColor: '#7C3AED',
       telemetryTitle: 'Lead Dispatch Specialist',
@@ -101,10 +105,20 @@ export default function HeroAiVoiceConsole() {
     }
   }, []);
 
-  const stopSpeech = () => {
+  // Parse "0:08" string into integer seconds
+  const parseSeconds = (tStr: string) => {
+    const parts = tStr.split(':').map(Number);
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+    return 0;
+  };
+
+  const stopAll = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
+    }
+    if (audioRef.current) {
+      audioRef.current.pause();
     }
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
@@ -112,7 +126,14 @@ export default function HeroAiVoiceConsole() {
   };
 
   const playStepSpeech = (stepIndex: number) => {
-    stopSpeech();
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+
     if (!isPlaying || isMuted || !('speechSynthesis' in window)) {
       if (isPlaying) {
         timeoutRef.current = setTimeout(() => {
@@ -168,26 +189,78 @@ export default function HeroAiVoiceConsole() {
     }
   };
 
+  // Synchronize playback
   useEffect(() => {
-    if (isPlaying) {
-      playStepSpeech(currentStep);
-    } else {
-      stopSpeech();
+    if (!isPlaying) {
+      stopAll();
+      return;
     }
-    return () => stopSpeech();
-  }, [currentStep, isPlaying, isMuted, selectedVoiceProfile, selectedIndustry]);
+
+    if (usingAudioTrack && audioRef.current) {
+      // Audio element handles playback & stepping via onTimeUpdate
+      audioRef.current.play().catch(() => {
+        setUsingAudioTrack(false);
+        playStepSpeech(currentStep);
+      });
+    } else {
+      playStepSpeech(currentStep);
+    }
+
+    return () => stopAll();
+  }, [isPlaying, selectedIndustry, usingAudioTrack]);
+
+  // Audio track event handlers
+  const handleAudioTimeUpdate = () => {
+    if (!audioRef.current) return;
+    const curTime = audioRef.current.currentTime;
+    const dialogue = activeScenario.dialogue;
+    for (let i = dialogue.length - 1; i >= 0; i--) {
+      if (curTime >= parseSeconds(dialogue[i].time)) {
+        if (currentStep !== i) setCurrentStep(i);
+        break;
+      }
+    }
+  };
+
+  const handleAudioEnded = () => {
+    setIsPlaying(false);
+    setCurrentStep(0);
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+    }
+  };
 
   const handleTogglePlay = () => {
     const next = !isPlaying;
     setIsPlaying(next);
-    if (!next) stopSpeech();
+    if (!next) {
+      stopAll();
+    }
   };
 
   const handleSelectIndustry = (ind: 'dentist' | 'hvac') => {
-    stopSpeech();
+    stopAll();
     setIsPlaying(false);
     setSelectedIndustry(ind);
-    setCurrentStep(2); // Set to the highlight response step
+    setCurrentStep(2);
+    if (audioRef.current) {
+      audioRef.current.currentTime = parseSeconds(scenarios[ind].dialogue[2].time);
+    }
+  };
+
+  const handleJumpToStep = (idx: number) => {
+    setCurrentStep(idx);
+    if (usingAudioTrack && audioRef.current) {
+      const targetSec = parseSeconds(activeScenario.dialogue[idx].time);
+      audioRef.current.currentTime = targetSec;
+      if (!isPlaying) {
+        setIsPlaying(true);
+      }
+    } else {
+      if (isPlaying) {
+        playStepSpeech(idx);
+      }
+    }
   };
 
   const isReceptionist = currentLine.speaker === 'Receptionist';
@@ -346,10 +419,7 @@ export default function HeroAiVoiceConsole() {
               {activeScenario.dialogue.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => {
-                    stopSpeech();
-                    setCurrentStep(idx);
-                  }}
+                  onClick={() => handleJumpToStep(idx)}
                   className={`rounded-full transition-all duration-200 ${
                     currentStep === idx
                       ? 'w-4 h-2 bg-[#D4AF37]'
@@ -467,6 +537,17 @@ export default function HeroAiVoiceConsole() {
         </div>
 
       </div>
+
+      {/* Hidden Audio Element for High-Definition Real Recording */}
+      <audio
+        ref={audioRef}
+        src={activeScenario.audioUrl}
+        onTimeUpdate={handleAudioTimeUpdate}
+        onEnded={handleAudioEnded}
+        onError={() => setUsingAudioTrack(false)}
+        onCanPlay={() => setUsingAudioTrack(true)}
+        preload="auto"
+      />
 
     </div>
   );
