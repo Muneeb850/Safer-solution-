@@ -14,16 +14,36 @@ export default function Contact() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [honeypot, setHoneypot] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, website: honeypot }),
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message. Please try again.');
+      }
+
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', service: 'AI Voice Receptionist', message: '' });
       setTimeout(() => setIsSubmitted(false), 6000);
-    }, 1200);
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error ? err.message : 'Failed to send message. Please call us at (713) 364-5155.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -153,6 +173,24 @@ export default function Contact() {
                       className="w-full bg-[#F8FAFC] border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-[#0F172A] placeholder-slate-400 focus:outline-none focus:border-[#0F172A] transition-colors"
                     />
                   </div>
+
+                  {/* Honeypot field (hidden from humans, catches spam bots) */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    className="hidden"
+                    aria-hidden="true"
+                  />
+
+                  {errorMessage && (
+                    <div className="bg-rose-50 border border-rose-200 text-rose-700 text-sm rounded-xl px-4 py-3">
+                      {errorMessage}
+                    </div>
+                  )}
 
                   <button
                     type="submit"
