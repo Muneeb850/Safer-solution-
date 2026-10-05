@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
 
 const stats = [
-  { value: 4.8, prefix: '$', suffix: 'M+', label: 'Recovered Revenue', sub: 'Captured from missed-call leads', color: '#0F172A' },
-  { value: 500, suffix: '+', label: 'Projects Deployed', sub: 'Web, mobile & AI systems', color: '#C59B6D' },
+  { value: 50, prefix: '$', suffix: 'k+', label: 'Recovered Revenue', sub: 'Captured from missed-call leads', color: '#0F172A' },
+  { value: 20, suffix: '+', label: 'Projects Deployed', sub: 'Web, mobile & AI systems', color: '#C59B6D' },
   { value: 99.8, suffix: '%', decimals: 1, label: 'AI Call Resolution', sub: 'Accurate intent & scheduling', color: '#0F172A' },
   { value: 15, suffix: '×', label: 'Average Client ROI', sub: 'Bottom-line revenue growth', color: '#7C3AED' },
 ];
