@@ -6,15 +6,14 @@ export default function HeroAiVoiceConsole() {
   const [selectedVoiceProfile, setSelectedVoiceProfile] = useState<'sophia' | 'charlotte'>('sophia');
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [currentStep, setCurrentStep] = useState(2); // Start at step 2 (Timestamp 0:08)
+  const [currentStep, setCurrentStep] = useState(0); // Always start from the very beginning (0:00)
   const [availableVoices, setAvailableVoices] = useState<SpeechSynthesisVoice[]>([]);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [usingAudioTrack, setUsingAudioTrack] = useState(false);
 
   const voiceProfiles = {
-    sophia: { name: 'Sophia', pitch: 1.08, rate: 0.92, keywords: ['UK', 'Susan', 'Serena', 'Google UK English', 'Female'] },
-    charlotte: { name: 'Charlotte', pitch: 0.88, rate: 0.90, keywords: ['Hazel', 'Veena', 'Moira', 'Samantha', 'Female'] },
+    sophia: { name: 'Sophia', pitch: 1.0, rate: 1.0, keywords: ['Ava', 'Jenny', 'US', 'Female'] },
+    charlotte: { name: 'Charlotte', pitch: 1.0, rate: 1.0, keywords: ['Sonia', 'UK', 'Female'] },
   };
 
   const activePersona = voiceProfiles[selectedVoiceProfile];
@@ -24,20 +23,19 @@ export default function HeroAiVoiceConsole() {
     dentist: {
       businessName: 'Apex Dental Care & Orthodontics',
       subTitle: 'Dr. James Thorne, D.D.S. • 24/7 Dental Receptionist',
-      audioUrl: '/audio/dentist_demo.mp3',
       icon: Smile,
       badgeColor: '#C59B6D',
       telemetryTitle: 'Attending Dentist',
       providerName: 'Dr. James Thorne, D.D.S.',
       providerClinic: 'Apex Dental Care & Orthodontics',
       customerRole: 'Patient Name:',
-      customerName: 'Emily Roberts',
+      customerName: 'Michael Roberts',
       customerPhone: '713-555-0148',
       reasonRole: 'Consultation Reason:',
       reasonText: 'Severe Toothache & Exam',
       confirmedSlot: 'Tomorrow at 11:00 AM EST',
       callerLabel: 'Patient Calling',
-      callerName: 'Emily Roberts',
+      callerName: 'Michael Roberts',
       workflows: [
         'Dental Chair & Operatory 2 Reserved',
         'Pre-appointment Patient SMS Sent',
@@ -49,8 +47,8 @@ export default function HeroAiVoiceConsole() {
         { time: '0:08', speaker: 'Receptionist', text: "I am so sorry to hear you're in pain! I have an emergency opening with Dr. Thorne tomorrow at 11:00 AM EST, or Thursday at 2:00 PM. Which works best for you?" },
         { time: '0:14', speaker: 'Caller', text: "Tomorrow at 11:00 AM works great." },
         { time: '0:17', speaker: 'Receptionist', text: "Tomorrow at 11:00 AM is reserved! May I please have your full name and best callback phone number?" },
-        { time: '0:22', speaker: 'Caller', text: "My name is Emily Roberts, and my phone number is 713-555-0148." },
-        { time: '0:27', speaker: 'Receptionist', text: "Thank you, Emily! Your dental appointment with Dr. Thorne for tomorrow at 11:00 AM is confirmed. We just sent an SMS confirmation to 713-555-0148. Have a wonderful day!" },
+        { time: '0:22', speaker: 'Caller', text: "My name is Michael Roberts, and my phone number is 713-555-0148." },
+        { time: '0:27', speaker: 'Receptionist', text: "Thank you, Michael! Your dental appointment with Dr. Thorne for tomorrow at 11:00 AM is confirmed. We just sent an SMS confirmation to 713-555-0148. Have a wonderful day!" },
       ],
     },
     hvac: {
@@ -88,13 +86,13 @@ export default function HeroAiVoiceConsole() {
   };
 
   const activeScenario = scenarios[selectedIndustry];
-  const currentLine = activeScenario.dialogue[currentStep] || activeScenario.dialogue[2];
+  const currentLine = activeScenario.dialogue[currentStep] || activeScenario.dialogue[0];
 
   const getFormattedText = (rawText: string) => {
     return rawText.replace(/\{NAME\}/g, activePersona.name);
   };
 
-  // Populate browser voices
+  // Populate browser voices for fallback
   useEffect(() => {
     if ('speechSynthesis' in window) {
       const updateVoices = () => {
@@ -104,13 +102,6 @@ export default function HeroAiVoiceConsole() {
       window.speechSynthesis.onvoiceschanged = updateVoices;
     }
   }, []);
-
-  // Parse "0:08" string into integer seconds
-  const parseSeconds = (tStr: string) => {
-    const parts = tStr.split(':').map(Number);
-    if (parts.length === 2) return parts[0] * 60 + parts[1];
-    return 0;
-  };
 
   const stopAll = () => {
     if (timeoutRef.current) {
@@ -138,7 +129,7 @@ export default function HeroAiVoiceConsole() {
       if (isPlaying) {
         timeoutRef.current = setTimeout(() => {
           advanceNextStep(stepIndex);
-        }, 4500);
+        }, 4000);
       }
       return;
     }
@@ -152,8 +143,8 @@ export default function HeroAiVoiceConsole() {
     utterance.lang = 'en-US';
 
     if (isAi) {
-      utterance.pitch = activePersona.pitch;
-      utterance.rate = activePersona.rate;
+      utterance.pitch = 1.0;
+      utterance.rate = 1.0;
 
       if (availableVoices.length > 0) {
         const enVoices = availableVoices.filter((v) => v.lang.toLowerCase().includes('en'));
@@ -163,14 +154,14 @@ export default function HeroAiVoiceConsole() {
         if (found) utterance.voice = found;
       }
     } else {
-      utterance.pitch = 0.88;
-      utterance.rate = 1.0;
+      utterance.pitch = 0.85;
+      utterance.rate = 0.98;
     }
 
     utterance.onend = () => {
       timeoutRef.current = setTimeout(() => {
         advanceNextStep(stepIndex);
-      }, 1000);
+      }, 500);
     };
 
     utterance.onerror = () => {
@@ -189,52 +180,67 @@ export default function HeroAiVoiceConsole() {
     }
   };
 
-  // Synchronize playback
+  const currentAudioSrc = `/audio/${selectedIndustry}/${selectedVoiceProfile}/${currentStep}.mp3`;
+
+  // Trigger audio or speech when isPlaying or currentStep changes
   useEffect(() => {
     if (!isPlaying) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
       stopAll();
       return;
     }
 
-    if (usingAudioTrack && audioRef.current) {
-      // Audio element handles playback & stepping via onTimeUpdate
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.muted = isMuted;
       audioRef.current.play().catch(() => {
-        setUsingAudioTrack(false);
+        // Fallback to speech synthesis if audio cannot be played
         playStepSpeech(currentStep);
       });
     } else {
       playStepSpeech(currentStep);
     }
 
-    return () => stopAll();
-  }, [isPlaying, selectedIndustry, usingAudioTrack]);
-
-  // Audio track event handlers
-  const handleAudioTimeUpdate = () => {
-    if (!audioRef.current) return;
-    const curTime = audioRef.current.currentTime;
-    const dialogue = activeScenario.dialogue;
-    for (let i = dialogue.length - 1; i >= 0; i--) {
-      if (curTime >= parseSeconds(dialogue[i].time)) {
-        if (currentStep !== i) setCurrentStep(i);
-        break;
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
       }
+    };
+  }, [currentStep, isPlaying, selectedIndustry, selectedVoiceProfile]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.muted = isMuted;
     }
-  };
+  }, [isMuted]);
 
   const handleAudioEnded = () => {
-    setIsPlaying(false);
-    setCurrentStep(0);
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
+    if (!isPlaying) return;
+    timeoutRef.current = setTimeout(() => {
+      if (currentStep < activeScenario.dialogue.length - 1) {
+        setCurrentStep((prev) => prev + 1);
+      } else {
+        setIsPlaying(false);
+        setCurrentStep(0);
+      }
+    }, 450); // Natural conversational gap between speaker turns
+  };
+
+  const handleAudioError = () => {
+    if (isPlaying) {
+      playStepSpeech(currentStep);
     }
   };
 
   const handleTogglePlay = () => {
-    const next = !isPlaying;
-    setIsPlaying(next);
-    if (!next) {
+    if (isPlaying) {
+      setIsPlaying(false);
       stopAll();
+    } else {
+      setIsPlaying(true);
     }
   };
 
@@ -242,25 +248,20 @@ export default function HeroAiVoiceConsole() {
     stopAll();
     setIsPlaying(false);
     setSelectedIndustry(ind);
-    setCurrentStep(2);
-    if (audioRef.current) {
-      audioRef.current.currentTime = parseSeconds(scenarios[ind].dialogue[2].time);
-    }
+    setCurrentStep(0); // Reset to start point (0:00)
+  };
+
+  const handleSelectVoiceProfile = (profile: 'sophia' | 'charlotte') => {
+    stopAll();
+    setIsPlaying(false);
+    setSelectedVoiceProfile(profile);
+    setCurrentStep(0); // Reset to start point (0:00)
   };
 
   const handleJumpToStep = (idx: number) => {
+    stopAll();
     setCurrentStep(idx);
-    if (usingAudioTrack && audioRef.current) {
-      const targetSec = parseSeconds(activeScenario.dialogue[idx].time);
-      audioRef.current.currentTime = targetSec;
-      if (!isPlaying) {
-        setIsPlaying(true);
-      }
-    } else {
-      if (isPlaying) {
-        playStepSpeech(idx);
-      }
-    }
+    setIsPlaying(true);
   };
 
   const isReceptionist = currentLine.speaker === 'Receptionist';
@@ -328,10 +329,7 @@ export default function HeroAiVoiceConsole() {
               return (
                 <button
                   key={voiceKey}
-                  onClick={() => {
-                    stopSpeech();
-                    setSelectedVoiceProfile(voiceKey);
-                  }}
+                  onClick={() => handleSelectVoiceProfile(voiceKey)}
                   className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full transition-all duration-150 ${
                     isSelected
                       ? 'bg-purple-600 text-white shadow-sm font-bold'
@@ -538,14 +536,12 @@ export default function HeroAiVoiceConsole() {
 
       </div>
 
-      {/* Hidden Audio Element for High-Definition Real Recording */}
+      {/* Hidden Audio Element for High-Definition Real Neural Recording */}
       <audio
         ref={audioRef}
-        src={activeScenario.audioUrl}
-        onTimeUpdate={handleAudioTimeUpdate}
+        src={currentAudioSrc}
         onEnded={handleAudioEnded}
-        onError={() => setUsingAudioTrack(false)}
-        onCanPlay={() => setUsingAudioTrack(true)}
+        onError={handleAudioError}
         preload="auto"
       />
 
