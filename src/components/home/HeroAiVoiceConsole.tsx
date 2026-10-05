@@ -3,7 +3,7 @@ import { Play, Pause, Volume2, VolumeX, CheckCircle2, User, Phone, Stethoscope, 
 
 export default function HeroAiVoiceConsole() {
   const [selectedIndustry, setSelectedIndustry] = useState<'dentist' | 'hvac'>('dentist');
-  const [selectedVoiceProfile, setSelectedVoiceProfile] = useState<'sophia' | 'charlotte'>('sophia');
+  const [selectedVoiceProfile, setSelectedVoiceProfile] = useState<'sophia' | 'sarah' | 'charlotte' | 'priya'>('sophia');
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentStep, setCurrentStep] = useState(0); // Always start from the very beginning (0:00)
@@ -12,8 +12,10 @@ export default function HeroAiVoiceConsole() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const voiceProfiles = {
-    sophia: { name: 'Sophia', pitch: 1.0, rate: 1.0, keywords: ['Ava', 'Jenny', 'US', 'Female'] },
-    charlotte: { name: 'Charlotte', pitch: 1.0, rate: 1.0, keywords: ['Sonia', 'UK', 'Female'] },
+    sophia: { name: 'Sophia', accent: 'US Energetic', pitch: 1.0, rate: 1.0, keywords: ['Ava', 'Jenny', 'US', 'Female'] },
+    sarah: { name: 'Sarah', accent: 'US Executive', pitch: 1.0, rate: 1.0, keywords: ['Aria', 'Sarah', 'US', 'Female'] },
+    charlotte: { name: 'Charlotte', accent: 'UK Articulate', pitch: 1.0, rate: 1.0, keywords: ['Sonia', 'Libby', 'UK', 'Female'] },
+    priya: { name: 'Priya', accent: 'Indian English', pitch: 1.0, rate: 1.0, keywords: ['Neerja', 'Heera', 'India', 'Female'] },
   };
 
   const activePersona = voiceProfiles[selectedVoiceProfile];
@@ -251,7 +253,7 @@ export default function HeroAiVoiceConsole() {
     setCurrentStep(0); // Reset to start point (0:00)
   };
 
-  const handleSelectVoiceProfile = (profile: 'sophia' | 'charlotte') => {
+  const handleSelectVoiceProfile = (profile: 'sophia' | 'sarah' | 'charlotte' | 'priya') => {
     stopAll();
     setIsPlaying(false);
     setSelectedVoiceProfile(profile);
@@ -291,7 +293,7 @@ export default function HeroAiVoiceConsole() {
           </div>
         </div>
 
-        {/* Right: Controls Strip (Industry Tabs + Sophia / Charlotte) */}
+        {/* Right: Controls Strip (Industry Tabs + Voice Audition Pills) */}
         <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
           
           {/* Industry Options (Dentist vs HVAC) */}
@@ -318,25 +320,31 @@ export default function HeroAiVoiceConsole() {
             </button>
           </div>
 
-          {/* Voice Persona Selector (Sophia & Charlotte Only) */}
+          {/* Voice Persona Selector (Sophia, Sarah, Charlotte, Priya) */}
           <div className="flex items-center gap-1 bg-black/40 p-1 rounded-full border border-white/5">
             <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider flex items-center px-1.5">
               <span className="hidden md:inline">VOICE:</span>
             </span>
-            {(['sophia', 'charlotte'] as const).map((voiceKey) => {
+            {(['sophia', 'sarah', 'charlotte', 'priya'] as const).map((voiceKey) => {
               const isSelected = selectedVoiceProfile === voiceKey;
               const profile = voiceProfiles[voiceKey];
               return (
                 <button
                   key={voiceKey}
                   onClick={() => handleSelectVoiceProfile(voiceKey)}
-                  className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full transition-all duration-150 ${
+                  className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full transition-all duration-150 flex items-center gap-1 ${
                     isSelected
                       ? 'bg-purple-600 text-white shadow-sm font-bold'
                       : 'text-slate-400 hover:text-white'
                   }`}
+                  title={`${profile.name} (${profile.accent})`}
                 >
-                  {profile.name}
+                  <span>{profile.name}</span>
+                  {voiceKey === 'priya' && (
+                    <span className="text-[9px] px-1 py-0.2 bg-amber-400/20 text-amber-300 rounded font-bold leading-none">
+                      IN
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -360,7 +368,7 @@ export default function HeroAiVoiceConsole() {
                 <span>LIVE VOICE AGENT SIMULATION • 00:24</span>
               </span>
               <span className="bg-[#1C1F2E] border border-white/10 text-amber-300 text-[10px] px-2 py-0.5 rounded-md font-mono font-medium">
-                Receptionist: {activePersona.name}
+                Receptionist: {activePersona.name} ({activePersona.accent})
               </span>
             </div>
 
